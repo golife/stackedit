@@ -287,6 +287,7 @@ define([
 	};
 
 	// Initialize multiple things and then fire eventMgr.onReady
+	// 主入口
 	core.onReady = function() {
 		// Add RTL class
 		document.body.className += ' ' + settings.editMode;
