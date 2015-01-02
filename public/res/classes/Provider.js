@@ -9,6 +9,7 @@ define([
     'jsondiffpatch'
 ], function(_, utils, settings, eventMgr, fileMgr, editor, diff_match_patch, jsondiffpatch) {
 
+// alert(3);
     function Provider(providerId, providerName) {
         this.providerId = providerId;
         this.providerName = providerName;

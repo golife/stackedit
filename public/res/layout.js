@@ -400,6 +400,7 @@ define([
 		onResize();
 	}
 
+	// 入口
 	layout.init = function() {
 
 		var isModalShown = 0;
@@ -491,6 +492,7 @@ define([
 
 		documentPanel.isOpen = false;
 		documentPanel.createToggler(true);
+		// 打开menu
 		documentPanel.$elt.find('.toggle-button').click(_.bind(documentPanel.toggle, documentPanel));
 
 		// Hide panels when clicking on a non collapse element

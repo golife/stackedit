@@ -431,7 +431,16 @@ define([
 		};
 	}
 
+	// 设置值
 	editor.setValue = setValue;
+
+	editor.setContent = function(content) {
+		contentElt.textContent = content;
+		// Force this since the content could be the same
+		checkContentChange();
+	};
+
+	window.we = editor;
 
 	function replace(selectionStart, selectionEnd, replacement) {
 		undoMgr.currentMode = undoMgr.currentMode || 'replace';
@@ -770,6 +779,7 @@ define([
 
 	editor.adjustCommentOffsets = adjustCommentOffsets;
 
+	// 入口
 	editor.init = function() {
 		inputElt = document.getElementById('wmd-input');
 		$inputElt = $(inputElt);

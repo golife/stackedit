@@ -218,8 +218,10 @@ define([
 		}
 		fileDesc = fileDescParam;
 
+		// If the editor is already created, 返回之
+		// 再fileDEsc有什么用?
 		if(pagedownEditor !== undefined) {
-			// If the editor is already created
+			
 			editor.undoMgr.init();
 			return pagedownEditor.uiManager.setUndoRedoButtonStates();
 		}
@@ -269,6 +271,7 @@ define([
 
 		// Add customized buttons
 		var $btnGroupElt = $('.wmd-button-group1');
+		
 		$("#wmd-bold-button").append($('<i class="icon-bold">')).appendTo($btnGroupElt);
 		$("#wmd-italic-button").append($('<i class="icon-italic">')).appendTo($btnGroupElt);
 		$btnGroupElt = $('.wmd-button-group2');
@@ -292,6 +295,7 @@ define([
 		// Add RTL class
 		document.body.className += ' ' + settings.editMode;
 
+		// 这里, 以后肯定都是bodyEditorHTML, 用bodyEditorHTML不是这里加载的, 直接在html写上
 		if(window.viewerMode === true) {
 			document.body.innerHTML = bodyViewerHTML;
 		}
@@ -312,10 +316,12 @@ define([
 		// Detect user activity
 		$(document).mousemove(setUserActive).keypress(setUserActive);
 
+		// 布局, 一些事件, 比如打开左侧menu
 		layout.init();
 		editor.init();
 
 		// Do periodic tasks
+		// 这里去掉
 		intervalId = window.setInterval(function() {
 			utils.updateCurrentTime();
 			checkWindowUnique();

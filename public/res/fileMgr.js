@@ -47,6 +47,7 @@ define([
 		}
 
 		// Refresh the editor (even if it's the same file)
+		
 		core.initEditor(fileDesc);
 	};
 

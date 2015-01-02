@@ -205,9 +205,9 @@ require([
 	"core",
 	"eventMgr",
 	"synchronizer",
-	"publisher",
-	"sharing",
-	"mediaImporter",
+	// "publisher",
+	// "sharing",
+	// "mediaImporter",
 	"css",
 	"rangy-cssclassapplier",
 	themeModule
