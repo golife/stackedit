@@ -505,6 +505,8 @@ define([
 	}
 
 	editor.getValue = getValue;
+	// life
+	editor.getContent = getValue;
 
 	function focus() {
 		$contentElt.focus();
@@ -1075,9 +1077,11 @@ define([
 		sectionList = leftSections.concat(modifiedSections).concat(rightSections);
 	}
 
+	// 高亮预览
 	function highlightSections() {
 		var newSectionEltList = document.createDocumentFragment();
 		modifiedSections.forEach(function(section) {
+			// 高亮之
 			highlight(section);
 			newSectionEltList.appendChild(section.elt);
 		});
@@ -1139,10 +1143,18 @@ define([
 		};
 	})();
 
+	// 高亮用户所输入的
+	// 实现编辑器下预览
 	function highlight(section) {
 		var text = escape(section.text);
 		if(!window.viewerMode) {
+			// log("pre")
+			// log(text);
+			// # lif
 			text = Prism.highlight(text, Prism.languages.md);
+			// log('after');
+			// <span class="token h1" ><span class="token md md-hash" >#</span> lif</span>
+			// log(text);
 		}
 		var frontMatter = section.textWithFrontMatter.substring(0, section.textWithFrontMatter.length - section.text.length);
 		if(frontMatter.length) {

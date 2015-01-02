@@ -86,6 +86,8 @@ define([
     };
 
     var sectionCounter = 0;
+    // 当内容改变时, 触发之
+    // content全部内容
     function parseFileContent(fileDescParam, content) {
         if(fileDescParam !== fileDesc) {
             return;
@@ -112,6 +114,7 @@ define([
         });
         // Last section
         addSection(offset, text.length);
+        // 触发事件
         eventMgr.onSectionsCreated(sectionList);
     }
 
