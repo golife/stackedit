@@ -272,6 +272,7 @@ define([
 		};
 
 		if(window.viewerMode === false) {
+			/*
 			// Create accordion in settings dialog
 			var accordionHtml = _.chain(extensionList).sortBy(function(extension) {
 				return extension.extensionName.toLowerCase();
@@ -284,6 +285,7 @@ define([
 				}) : "");
 			}, "").value();
 			document.querySelector('.accordion-extensions').innerHTML = accordionHtml;
+			*/
 
 			// Create extension buttons
 			/*

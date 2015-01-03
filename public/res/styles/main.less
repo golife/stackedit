@@ -57,7 +57,7 @@
 @menu-panel-width: 280px;
 @document-panel-width: 320px;
 @jgrowl-width: 240px;
-@resizer-size: 32px;
+@resizer-size: 22px;
 @editor-line-weight: 1.65;
 
 /* Bootstrap */
@@ -1024,7 +1024,9 @@ a {
 .layout-resizer {
 	.layout-panel();
 	width: @resizer-size;
-	height: @resizer-size;
+	position: absolute;
+	top: 0;
+	bottom: 0;
 	&.open {
 		cursor: e-resize;
 		.layout-vertical & {
@@ -1046,9 +1048,15 @@ a {
 		.layout-animate & {
 			.transition-transform(350ms ease-in-out);
 		}
-		line-height: 55px;
+		// line-height: 55px;
+		top: 50%;
+		margin-top: -15px;
+		width: 22px;
+		text-align: center;
 		i:before {
 			content: '\e87d';
+			margin: 0;
+			padding: 0;
 		}
 		&.open > i:before {
 			content: '\e87e';
@@ -1351,7 +1359,7 @@ a {
 	position: absolute;
 	overflow: auto;
 	right: 0;
-	left: 50px;
+	left: 30px;
 }
 
 .wmd-prompt-background {

@@ -1,7 +1,7 @@
 @import "../styles/main.less";
 
 @primary: #808080;
-@navbar-default-bg: #4a4a4a;
+@navbar-default-bg: #f0f0f0;
 @link-color: #4FA1DB;
 
 @input-bg: #fff;
@@ -13,9 +13,28 @@
 
 
 // life
+#mdEditor {
+.navbar .nav {
+	height: 30px;
+	margin: 0;
+}
+.navbar .nav li {
+	line-height: 28px;
+}
+.navbar .btn {
+	height: 30px;
+	padding: 0 5px;
+	color: #666;
+	font-size: 14px;
+}
 .navbar-default {
 	background-color: @navbar-default-bg;
-	border-color: #393939;
+	border: none;
+	padding: 0;
+	height: 30px;
+	min-height: 30px;
+	overflow: hidden;
+	margin-bottom: 0;
 }
 .btn-success {
 	color: #dddddd;
@@ -39,17 +58,33 @@
   top: 0;
 }
 .layout-wrapper-l3  {
-  top: 50px;
+  top: 30px;
+  margin-top: 5px;
+	border: 1px solid #eee;
+	border-radius: 5px;
 }
+
 #wmd-input {
   top: 0;
   width: 300px;
   bottom: 0;
+  padding: 0 3px;
+  padding-top: 3px;
 }
 .preview-panel {
   left: 300px;
   right: 0;
   bottom: 0;
+}
+
+.wmd-button, .preview-button {
+	width: auto;
+}
+.extension-preview-buttons {
+	top: 35px;
+	.btn-success {
+		padding: 3px;
+	}
 }
 
 
@@ -132,4 +167,6 @@
 		outline: 0;
 		.box-shadow(~"@{form-control-inset-shadow}, 0 0 12px -1px @{color}");
 	}
+}
+
 }

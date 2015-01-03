@@ -433,7 +433,7 @@ define([
 	// 设置值
 	editor.setValue = setValue;
 
-	var contentQueue = null;
+	var contentQueue = false;
 	editor.setContent = function(content) {
 		if(!fileDesc) {
 			fileDesc = {content: content};
@@ -447,7 +447,7 @@ define([
 			contentElt.textContent = content;
 			// Force this since the content could be the same
 			checkContentChange();
-			contentQueue = null;
+			contentQueue = false;
 		} else {
 			contentQueue = content;
 		}
@@ -1025,7 +1025,7 @@ define([
 		};
 
 		// 在init之前就有设置值的命令
-		if(contentQueue) {
+		if(contentQueue !== false) {
 			editor.setContent(contentQueue);
 		}
 	};
