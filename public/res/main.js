@@ -169,29 +169,9 @@ requirejs.config({
 	}
 });
 
-// Check browser compatibility
-try {
-	var test = 'seLocalStorageCheck';
-	localStorage.setItem(test, test);
-	localStorage.removeItem(test);
-	var obj = {};
-	Object.defineProperty(obj, 'prop', {
-		get: function() {
-		},
-		set: function() {
-		}
-	});
-}
-catch(e) {
-	alert('Your browser is not supported, sorry!');
-	throw e;
-}
-
-// Viewer mode is deduced from the body class
-window.viewerMode = /(^| )viewer($| )/.test(document.body.className);
-
+window.viewerMode = false;
 // Keep the theme in a global variable
-window.theme = localStorage.themeV4 || 'default';
+window.theme = 'default';
 var themeModule = "less!themes/" + window.theme;
 if(window.baseDir.indexOf('-min') !== -1) {
 	themeModule = "css!themes/" + window.theme;
@@ -204,34 +184,20 @@ require([
 	"rangy",
 	"core",
 	"eventMgr",
-	"synchronizer",
+	// "synchronizer",
 	// "publisher",
 	// "sharing",
 	// "mediaImporter",
 	"css",
 	"rangy-cssclassapplier",
 	themeModule
-], function($, rangy, core, eventMgr) {
-
+], function($, rangy, core) {
 	if(window.noStart) {
 		return;
 	}
-
 	$(function() {
 		rangy.init();
-
 		// Here, all the modules are loaded and the DOM is ready
 		core.onReady();
-
-		// If browser has detected a new application cache.
-		if(window.applicationCache) {
-			window.applicationCache.addEventListener('updateready', function() {
-				if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-					window.applicationCache.swapCache();
-					eventMgr.onMessage('New version available!\nJust refresh the page to upgrade.');
-				}
-			}, false);
-		}
 	});
-
 });

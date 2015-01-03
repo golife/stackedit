@@ -10,24 +10,20 @@ define([
 	"storage",
 	"settings",
 	"eventMgr",
-	"monetizejs",
+	// "monetizejs",
 	"text!html/bodyEditor.html",
 	"text!html/bodyViewer.html",
 	"text!html/tooltipSettingsTemplate.html",
 	"text!html/tooltipSettingsPdfOptions.html",
 	"storage",
 	'pagedown'
-], function($, _, crel, editor, layout, constants, utils, storage, settings, eventMgr, MonetizeJS, bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
+], function($, _, crel, editor, layout, constants, utils, storage, settings, eventMgr, /*MonetizeJS, */bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
 
 	var core = {};
-
-	// Used for periodic tasks
-	var intervalId;
 
 	// Used to detect user activity
 	var isUserReal = false;
 	var userActive = false;
-	var windowUnique = true;
 	var userLastActivity = 0;
 
 	function setUserActive() {
@@ -37,69 +33,6 @@ define([
 		if(currentTime > userLastActivity + 1000) {
 			userLastActivity = currentTime;
 			eventMgr.onUserActive();
-		}
-	}
-
-	function isUserActive() {
-		if(utils.currentTime - userLastActivity > constants.USER_IDLE_THRESHOLD) {
-			userActive = false;
-		}
-		return userActive && windowUnique;
-	}
-
-	// Used to only have 1 window of the application in the same browser
-	var windowId;
-
-	function checkWindowUnique() {
-		if(isUserReal === false || windowUnique === false) {
-			return;
-		}
-		if(windowId === undefined) {
-			windowId = utils.id();
-			storage.frontWindowId = windowId;
-		}
-		var frontWindowId = storage.frontWindowId;
-		if(frontWindowId != windowId) {
-			windowUnique = false;
-			if(intervalId !== undefined) {
-				clearInterval(intervalId);
-			}
-			$(".modal").modal("hide");
-			$('.modal-non-unique').modal("show");
-			// Attempt to close the window
-			window.close();
-		}
-	}
-
-	// Offline management
-	var isOffline = false;
-	var offlineTime = utils.currentTime;
-	core.setOffline = function() {
-		offlineTime = utils.currentTime;
-		if(isOffline === false) {
-			isOffline = true;
-			eventMgr.onOfflineChanged(true);
-		}
-	};
-	function setOnline() {
-		if(isOffline === true) {
-			isOffline = false;
-			eventMgr.onOfflineChanged(false);
-		}
-	}
-
-	function checkOnline() {
-		// Try to reconnect if we are offline but we have some network
-		if(isOffline === true && navigator.onLine === true && offlineTime + constants.CHECK_ONLINE_PERIOD < utils.currentTime) {
-			offlineTime = utils.currentTime;
-			// Try to download anything to test the connection
-			$.ajax({
-				url: "//www.google.com/jsapi",
-				timeout: constants.AJAX_TIMEOUT,
-				dataType: "script"
-			}).done(function() {
-				setOnline();
-			});
 		}
 	}
 
@@ -212,20 +145,7 @@ define([
 	// Create the PageDown editor
 	var pagedownEditor;
 	var fileDesc;
-	core.initEditor = function(fileDescParam) {
-		if(fileDesc !== undefined) {
-			eventMgr.onFileClosed(fileDesc);
-		}
-		fileDesc = fileDescParam;
-
-		// If the editor is already created, 返回之
-		// 再fileDEsc有什么用?
-		if(pagedownEditor !== undefined) {
-			
-			editor.undoMgr.init();
-			return pagedownEditor.uiManager.setUndoRedoButtonStates();
-		}
-
+	core.initEditorFirst = function() {
 		// Create the converter and the editor
 		var converter = new Markdown.Converter();
 		var options = {
@@ -264,7 +184,7 @@ define([
 		eventMgr.onPagedownConfigure(pagedownEditor);
 		pagedownEditor.hooks.chain("onPreviewRefresh", eventMgr.onAsyncPreview);
 		pagedownEditor.run();
-		editor.undoMgr.init();
+		// editor.undoMgr.init();
 
 		// Hide default buttons
 		$(".wmd-button-row li").addClass("btn btn-success").css("left", 0).find("span").hide();
@@ -289,6 +209,22 @@ define([
 		$("#wmd-redo-button").append($('<i class="icon-forward">')).appendTo($btnGroupElt);
 	};
 
+	core.initEditor = function(fileDescParam) {
+		if(fileDesc !== undefined) {
+			eventMgr.onFileClosed(fileDesc);
+		}
+		fileDesc = fileDescParam;
+
+		// If the editor is already created, 返回之
+		// 再fileDEsc有什么用?
+		if(pagedownEditor !== undefined) {
+			editor.undoMgr.init();
+			return pagedownEditor.uiManager.setUndoRedoButtonStates();
+		}
+		core.initEditorFirst();
+		editor.undoMgr.init();
+	};
+
 	// Initialize multiple things and then fire eventMgr.onReady
 	// 主入口
 	core.onReady = function() {
@@ -296,22 +232,10 @@ define([
 		document.body.className += ' ' + settings.editMode;
 
 		// 这里, 以后肯定都是bodyEditorHTML, 用bodyEditorHTML不是这里加载的, 直接在html写上
-		if(window.viewerMode === true) {
-			document.body.innerHTML = bodyViewerHTML;
-		}
-		else {
-			document.body.innerHTML = bodyEditorHTML;
-		}
+		// document.body.innerHTML = bodyEditorHTML;
 
 		// Initialize utils library
 		utils.init();
-
-		// listen to online/offline events
-		$(window).on('offline', core.setOffline);
-		$(window).on('online', setOnline);
-		if(navigator.onLine === false) {
-			core.setOffline();
-		}
 
 		// Detect user activity
 		$(document).mousemove(setUserActive).keypress(setUserActive);
@@ -320,71 +244,13 @@ define([
 		layout.init();
 		editor.init();
 
-		// Do periodic tasks
-		// 这里去掉
-		intervalId = window.setInterval(function() {
-			utils.updateCurrentTime();
-			checkWindowUnique();
-			if(isUserActive() === true || window.viewerMode === true) {
-				eventMgr.onPeriodicRun();
-				checkOnline();
-			}
-		}, 1000);
-
 		eventMgr.onReady();
+
+		// life
+		var fileDesc = {content: ""};
+		eventMgr.onFileSelected(fileDesc);
+		core.initEditor(fileDesc);
 	};
-
-	var appId = 'ESTHdCYOi18iLhhO';
-	var monetize = new MonetizeJS({
-		applicationID: appId
-	});
-	var $alerts = $();
-
-	function isSponsor(payments) {
-		var result = payments && payments.app == appId && (
-			(payments.chargeOption && payments.chargeOption.alias == 'once') ||
-			(payments.subscriptionOption && payments.subscriptionOption.alias == 'yearly'));
-		eventMgr.isSponsor = result;
-		return result;
-	}
-
-	function removeAlerts() {
-		$alerts.remove();
-		$alerts = $();
-	}
-
-	function performPayment() {
-		monetize.getPayments({
-			pricingOptions: [
-				'once',
-				'yearly'
-			]
-		}, function(err, payments) {
-			if(isSponsor(payments)) {
-				eventMgr.onMessage('Thank you for sponsoring StackEdit!');
-				removeAlerts();
-			}
-		});
-	}
-
-	var checkPayment = _.debounce(function() {
-		if(isOffline) {
-			return;
-		}
-		monetize.getPaymentsImmediate(function(err, payments) {
-			removeAlerts();
-			if(!isSponsor(payments)) {
-				_.each(document.querySelectorAll('.modal-body'), function(modalBodyElt) {
-					var $elt = $('<div class="alert alert-danger">Please consider <a href="#">sponsoring StackEdit</a> for $5/year (or <a href="#">sign in</a> if you\'re already a sponsor).</div>');
-					$elt.find('a').click(performPayment);
-					modalBodyElt.insertBefore($elt[0], modalBodyElt.firstChild);
-					$alerts = $alerts.add($elt);
-				});
-			}
-		});
-	}, 3000);
-
-	eventMgr.addListener('onOfflineChanged', checkPayment);
 
 	// Other initialization that are not prioritary
 	eventMgr.addListener("onReady", function() {
@@ -582,9 +448,6 @@ define([
 			}, '');
 			document.getElementById('input-settings-theme').innerHTML = themeOptions;
 		}
-
-		//$('.modal-header').append('<a class="dialog-header-message" href="https://github.com/benweet/stackedit/issues/385" target="_blank">Give your feedback <i class="icon-megaphone"></i></a>');
-		checkPayment();
 	});
 
 	return core;

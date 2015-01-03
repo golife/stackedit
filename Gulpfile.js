@@ -119,7 +119,7 @@ gulp.task('less', ['clean-less'], function() {
 		'./public/res/themes/*.less'
 	])
 		.pipe(less({
-			compress: true
+			compress: false
 		}))
 		.pipe(gulp.dest('./public/res-min/themes/'));
 });

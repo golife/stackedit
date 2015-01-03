@@ -264,8 +264,6 @@ define([
 		// Fix a weird viewport behavior using pageup/pagedown in Webkit
 		wrapperL1.width = windowSize.width + menuPanelWidth + (documentPanel.isShown ? documentPanelWidth : 0);
 		wrapperL1.elt.style.width = wrapperL1.width + 'px';
-		documentPanel.right = documentPanel.isShown ? 0 : -documentPanelWidth;
-		documentPanel.elt.style.right = documentPanel.right + 'px';
 	}
 
 	function resizeAll() {
@@ -406,8 +404,6 @@ define([
 		var isModalShown = 0;
 		$(document.body).on('show.bs.modal', '.modal', function() {
 			// Close panel if open
-			menuPanel.toggle(false);
-			documentPanel.toggle(false);
 			isModalShown++;
 		}).on('hidden.bs.modal', '.modal', function() {
 			isModalShown--;
@@ -428,7 +424,7 @@ define([
 		wrapperL2 = new DomObject('.layout-wrapper-l2');
 		wrapperL3 = new DomObject('.layout-wrapper-l3');
 		navbar = new DomObject('.navbar');
-		menuPanel = new DomObject('.menu-panel');
+		menuPanel = new DomObject(	'.menu-panel');
 		documentPanel = new DomObject('.document-panel');
 		editor = new DomObject('#wmd-input');
 		previewPanel = new DomObject('.preview-panel');
@@ -492,11 +488,6 @@ define([
 
 		documentPanel.isOpen = false;
 		documentPanel.createToggler(true);
-		// 打开menu
-		documentPanel.$elt.find('.toggle-button').click(_.bind(documentPanel.toggle, documentPanel));
-
-		// Hide panels when clicking on a non collapse element
-		documentPanel.$elt.on('click', 'a[data-toggle!=collapse]', _.bind(documentPanel.toggle, documentPanel, false));
 
 		// Focus on editor when document panel is closed
 		documentPanel.$elt.on('hidden.layout.toggle', function() {
@@ -504,43 +495,7 @@ define([
 			isModalShown || editor.elt.focus();
 		});
 
-		menuPanel.isOpen = false;
 		if(!window.viewerMode) {
-			menuPanel.createToggler(true);
-			menuPanel.$elt.find('.toggle-button').click(_.bind(menuPanel.toggle, menuPanel));
-
-			// Hide panels when clicking on a non collapse element
-			menuPanel.$elt.on('click', 'a[data-toggle!=collapse]', _.bind(menuPanel.toggle, menuPanel, false));
-
-			// Close all open sub-menus when one submenu opens and when panel is closed
-			menuPanel.$elt.on('show.bs.collapse hidden.layout.toggle', function() {
-				menuPanel.$elt.find('.in').collapse('hide');
-			});
-
-			// Focus on editor when menu panel is closed
-			menuPanel.$elt.on('hidden.layout.toggle', function() {
-				isModalShown || editor.elt.focus();
-			});
-
-			// Gesture
-
-			/*
-			navbar.initHammer();
-			menuPanel.initHammer();
-			documentPanel.initHammer();
-			previewButtons.initHammer();
-
-			navbar.hammer.on('swiperight', _.bind(menuPanel.toggle, menuPanel, true));
-			navbar.hammer.on('swipeleft', _.bind(documentPanel.toggle, documentPanel, true));
-			navbar.hammer.on('swipeup', _.bind(navbar.toggle, navbar, false));
-
-			menuPanel.hammer.on('swiperight', _.bind(menuPanel.toggle, menuPanel, true));
-			menuPanel.hammer.on('swipeleft', _.bind(menuPanel.toggle, menuPanel, false));
-
-			documentPanel.hammer.on('swipeleft', _.bind(documentPanel.toggle, documentPanel, true));
-			documentPanel.hammer.on('swiperight', _.bind(documentPanel.toggle, documentPanel, false));
-			*/
-
 			previewResizer.initHammer(true);
 			var resizerInitialSize;
 			previewResizer.hammer.on('dragstart', function() {
@@ -596,17 +551,7 @@ define([
 			previewButtons.$elt.find('.btn-group').toggleClass('dropup', windowSize.height / 2 > -previewButtons.y);
 		});
 
-		// Configure Mousetrap
-		mousetrap.stopCallback = function() {
-			return menuPanel.isOpen || documentPanel.isOpen || isModalShown;
-		};
-
-		$(window).resize(resizeAll).focus(function() {
-			if(!menuPanel.isOpen && !documentPanel.isOpen && !isModalShown) {
-				editor.elt.focus();
-			}
-		});
-
+		
 		var styleContent = '';
 
 		// Apply font

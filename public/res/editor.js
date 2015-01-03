@@ -173,6 +173,7 @@ define([
 			}
 			offsetList = this.findOffsets(offsetList);
 			var startOffset = _.isObject(start) ? start : offsetList[startIndex];
+			// 这里可能会报错, 为什么?
 			range.setStart(startOffset.container, startOffset.offsetInContainer);
 			var endOffset = startOffset;
 			if(end && end != start) {
