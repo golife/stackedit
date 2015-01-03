@@ -190,7 +190,7 @@ require([
 	// "mediaImporter",
 	"css",
 	"rangy-cssclassapplier",
-	themeModule
+	// themeModule
 ], function($, rangy, core) {
 	if(window.noStart) {
 		return;

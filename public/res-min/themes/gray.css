@@ -45,32 +45,7 @@
 .navbar-form * {
   float: none;
 }
-.close {
-  float: right;
-  font-size: 22.5px;
-  font-weight: bold;
-  line-height: 1;
-  color: #3f3f3f;
-  text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-}
-.close:hover,
-.close:focus {
-  color: #3f3f3f;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-button.close {
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
-}
-/* lifelife */
+/** lifelife */
 /*
 
 Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>

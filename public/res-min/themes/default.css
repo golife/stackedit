@@ -51,32 +51,7 @@
 .navbar-form * {
   float: none;
 }
-.close {
-  float: right;
-  font-size: 22.5px;
-  font-weight: bold;
-  line-height: 1;
-  color: #3f3f3f;
-  text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-}
-.close:hover,
-.close:focus {
-  color: #3f3f3f;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-button.close {
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  -webkit-appearance: none;
-}
-/* lifelife */
+/** lifelife */
 /*
 
 Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
@@ -3854,6 +3829,24 @@ div.jGrowl div.jGrowl-notification {
     padding: 0 50px !important;
   }
 }
+.navbar-default {
+  background-color: #4a4a4a;
+  border-color: #393939;
+}
+.btn-success {
+  color: #dddddd;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-success.disabled {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-info {
+  color: rgba(128, 128, 128, 0.35);
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
 .buttons-dropdown .dropdown-menu .btn-success {
   color: #4d4d4d !important;
 }
@@ -3895,3 +3888,24 @@ div.jGrowl div.jGrowl-notification {
 .open .modal-document-manager .btn-default.dropdown-toggle {
   border-color: rgba(128, 128, 128, 0.1);
 }
+
+/*
+.layout-wrapper-l1, .layout-wrapper-l2, .layout-wrapper-l3 {
+  left: 0;
+  right:0;
+  bottom: 0;
+  top: 0;
+}
+.layout-wrapper-l3  {
+  top: 50px;
+}
+#wmd-input {
+  top: 0;
+  width: 300px;
+  bottom: 0;
+}
+.preview-panel {
+  left: 300px;
+  right: 0;
+  bottom: 0;
+}*/

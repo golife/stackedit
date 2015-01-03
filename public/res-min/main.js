@@ -24307,7 +24307,7 @@ this.DIFF_EQUAL = DIFF_EQUAL, define("diff_match_patch_uncompressed", function(e
 var themeModule = "less!themes/" + window.theme;
 
 -1 !== window.baseDir.indexOf("-min") && (themeModule = "css!themes/" + window.theme), 
-require([ "jquery", "rangy", "core", "eventMgr", "css", "rangy-cssclassapplier", themeModule ], function(e, t, n) {
+require([ "jquery", "rangy", "core", "eventMgr", "css", "rangy-cssclassapplier" ], function(e, t, n) {
  window.noStart || e(function() {
   t.init(), n.onReady();
  });

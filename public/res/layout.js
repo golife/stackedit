@@ -400,6 +400,7 @@ define([
 
 	// 入口
 	layout.init = function() {
+		return;
 
 		var isModalShown = 0;
 		$(document.body).on('show.bs.modal', '.modal', function() {
