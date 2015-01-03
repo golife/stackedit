@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"crel",
 	"utils",
@@ -8,7 +8,7 @@ define([
 	"rangy",
 	"text!html/findReplace.html",
 	"text!html/findReplaceSettingsBlock.html"
-], function($, _, crel, utils, Extension, mousetrap, rangy, findReplaceHTML, findReplaceSettingsBlockHTML) {
+], function(_, crel, utils, Extension, mousetrap, rangy, findReplaceHTML, findReplaceSettingsBlockHTML) {
 
 	var findReplace = new Extension("findReplace", 'Find and Replace', true, true);
 	findReplace.settingsBlock = findReplaceSettingsBlockHTML;

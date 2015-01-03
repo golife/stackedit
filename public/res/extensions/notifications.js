@@ -1,12 +1,12 @@
 define([
-    "jquery",
+    // "jquery",
     "underscore",
     "utils",
     "logger",
     "classes/Extension",
     "jgrowl",
     "text!html/notificationsSettingsBlock.html",
-], function($, _, utils, logger, Extension, jGrowl, notificationsSettingsBlockHTML) {
+], function(_, utils, logger, Extension, jGrowl, notificationsSettingsBlockHTML) {
 
     var notifications = new Extension("notifications", "Notifications");
     notifications.settingsBlock = notificationsSettingsBlockHTML;

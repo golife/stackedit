@@ -1,6 +1,6 @@
 /*globals Markdown */
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"utils",
 	"logger",
@@ -10,7 +10,7 @@ define([
 	'highlightjs',
 	'crel',
 	'pagedownExtra'
-], function($, _, utils, logger, Extension, markdownExtraSettingsBlockHTML, prettify, hljs) {
+], function( _, utils, logger, Extension, markdownExtraSettingsBlockHTML, prettify, hljs) {
 
 	var markdownExtra = new Extension("markdownExtra", "Markdown Extra", true);
 	markdownExtra.settingsBlock = markdownExtraSettingsBlockHTML;

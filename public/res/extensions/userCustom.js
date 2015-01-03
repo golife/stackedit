@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"utils",
 	"classes/Extension",
@@ -7,7 +7,7 @@ define([
 	"settings",
 	"text!html/userCustomSettingsBlock.html",
 	"text!html/tooltipUserCustomExtension.html"
-], function($, _, utils, Extension, fileSystem, settings, userCustomSettingsBlockHTML, tooltipUserCustomExtensionHTML) {
+], function( _, utils, Extension, fileSystem, settings, userCustomSettingsBlockHTML, tooltipUserCustomExtensionHTML) {
 
 	var userCustom = new Extension("userCustom", "UserCustom extension", true);
 	userCustom.settingsBlock = userCustomSettingsBlockHTML;

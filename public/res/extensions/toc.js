@@ -1,11 +1,11 @@
 define([
-    "jquery",
+    // "jquery",
     "underscore",
     "utils",
     "classes/Extension",
     "text!html/buttonToc.html",
     "text!html/tocSettingsBlock.html",
-], function($, _, utils, Extension, buttonTocHTML, tocSettingsBlockHTML) {
+], function(_, utils, Extension, buttonTocHTML, tocSettingsBlockHTML) {
 
     var toc = new Extension("toc", "Table of Contents", true);
     toc.settingsBlock = tocSettingsBlockHTML;

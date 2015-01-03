@@ -1,11 +1,11 @@
 define([
-    "jquery",
+    // "jquery",
     "underscore",
     "utils",
     "classes/Extension",
     "text!html/buttonHtmlCode.html",
     "text!html/buttonHtmlCodeSettingsBlock.html"
-], function($, _, utils, Extension, buttonHtmlCodeHTML, buttonHtmlCodeSettingsBlockHTML) {
+], function( _, utils, Extension, buttonHtmlCodeHTML, buttonHtmlCodeSettingsBlockHTML) {
 
     var buttonHtmlCode = new Extension("buttonHtmlCode", 'Button "HTML code"', true);
     buttonHtmlCode.settingsBlock = buttonHtmlCodeSettingsBlockHTML;

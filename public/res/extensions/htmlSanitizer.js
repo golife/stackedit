@@ -1,11 +1,11 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"utils",
 	"logger",
 	"classes/Extension",
 	"text!html/htmlSanitizerSettingsBlock.html"
-], function($, _, utils, logger, Extension, htmlSanitizerSettingsBlockHTML) {
+], function(_, utils, logger, Extension, htmlSanitizerSettingsBlockHTML) {
 
 	var htmlSanitizer = new Extension("htmlSanitizer", "HTML Sanitizer", true);
 	htmlSanitizer.settingsBlock = htmlSanitizerSettingsBlockHTML;

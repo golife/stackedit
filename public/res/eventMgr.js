@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"crel",
 	"mousetrap",
@@ -11,7 +11,7 @@ define([
 	"extensions/yamlFrontMatterParser",
 	"extensions/markdownSectionParser",
 	"extensions/partialRendering",
-	"extensions/buttonMarkdownSyntax",
+	// "extensions/buttonMarkdownSyntax",
 	// "extensions/googleAnalytics",
 	// "extensions/twitter",
 	// "extensions/dialogAbout",
@@ -34,17 +34,17 @@ define([
 	// "extensions/buttonSync",
 	// "extensions/buttonPublish",
 	// "extensions/buttonStat",
-	"extensions/buttonHtmlCode",
-	"extensions/buttonViewer",
-	"extensions/welcomeTour",
-	"extensions/shortcuts",
-	"extensions/userCustom",
+	// "extensions/buttonHtmlCode",
+	// "extensions/buttonViewer",
+	// "extensions/welcomeTour",
+	// "extensions/shortcuts",
+	// "extensions/userCustom",
 	// "extensions/comments",
 	"extensions/findReplace",
 	"extensions/htmlSanitizer",
-	"bootstrap",
+	// "bootstrap",
 	"jquery-waitforimages"
-], function($, _, crel, mousetrap, utils, logger, Extension, settings, settingsExtensionsAccordionHTML) {
+], function( _, crel, mousetrap, utils, logger, Extension, settings, settingsExtensionsAccordionHTML) {
 
 	var eventMgr = {};
 
@@ -286,6 +286,7 @@ define([
 			document.querySelector('.accordion-extensions').innerHTML = accordionHtml;
 
 			// Create extension buttons
+			/*
 			logger.log("onCreateButton");
 			var onCreateButtonListenerList = getExtensionListenerList("onCreateButton");
 			var extensionButtonsFragment = document.createDocumentFragment();
@@ -293,6 +294,7 @@ define([
 				extensionButtonsFragment.appendChild(createBtn(listener));
 			});
 			document.querySelector('.extension-buttons').appendChild(extensionButtonsFragment);
+			*/
 		}
 
 		// Create extension preview buttons

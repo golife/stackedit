@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"constants",
 	"core",
@@ -10,7 +10,7 @@ define([
 	"fileSystem",
 	"classes/FileDescriptor",
 	"text!WELCOME.md"
-], function($, _, constants, core, utils, storage, settings, eventMgr, fileSystem, FileDescriptor, welcomeContent) {
+], function( _, constants, core, utils, storage, settings, eventMgr, fileSystem, FileDescriptor, welcomeContent) {
 
 	var fileMgr = {};
 

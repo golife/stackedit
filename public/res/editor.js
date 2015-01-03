@@ -1,7 +1,6 @@
 /* jshint -W084, -W099 */
 // Credit to http://dabblet.com/
 define([
-	'jquery',
 	'underscore',
 	'utils',
 	'settings',
@@ -13,7 +12,7 @@ define([
 	'rangy',
 	'MutationObservers',
 	'libs/prism-markdown'
-], function($, _, utils, settings, eventMgr, Prism, diff_match_patch, jsondiffpatch, crel, rangy) {
+], function( _, utils, settings, eventMgr, Prism, diff_match_patch, jsondiffpatch, crel, rangy) {
 
 	var editor = {};
 	var scrollTop = 0;
@@ -173,7 +172,6 @@ define([
 			}
 			offsetList = this.findOffsets(offsetList);
 			var startOffset = _.isObject(start) ? start : offsetList[startIndex];
-			// 这里可能会报错, 为什么?
 			range.setStart(startOffset.container, startOffset.offsetInContainer);
 			var endOffset = startOffset;
 			if(end && end != start) {
@@ -435,10 +433,24 @@ define([
 	// 设置值
 	editor.setValue = setValue;
 
+	var contentQueue = null;
 	editor.setContent = function(content) {
-		contentElt.textContent = content;
-		// Force this since the content could be the same
-		checkContentChange();
+		if(!fileDesc) {
+			fileDesc = {content: content};
+		}
+		// 很可能还没init
+		if(contentElt) {
+			fileDesc = {content: content};
+			eventMgr.onFileSelected(fileDesc);
+			log(contentElt);
+			log(content);
+			contentElt.textContent = content;
+			// Force this since the content could be the same
+			checkContentChange();
+			contentQueue = null;
+		} else {
+			contentQueue = content;
+		}
 	};
 
 	window.we = editor;
@@ -506,8 +518,9 @@ define([
 	}
 
 	editor.getValue = getValue;
-	// life
 	editor.getContent = getValue;
+	// MD在common.js中
+	MD = editor;
 
 	function focus() {
 		$contentElt.focus();
@@ -1010,6 +1023,11 @@ define([
 				state.selectionEnd = state.selectionStart;
 			}
 		};
+
+		// 在init之前就有设置值的命令
+		if(contentQueue) {
+			editor.setContent(contentQueue);
+		}
 	};
 
 	var sectionList = [];

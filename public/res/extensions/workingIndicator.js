@@ -1,9 +1,9 @@
 define([
-    "jquery",
+    // "jquery",
     "underscore",
     "crel",
     "classes/Extension"
-], function ($, _, crel, Extension) {
+], function (_, crel, Extension) {
 
     var workingIndicator = new Extension("workingIndicator", "Working Indicator");
 

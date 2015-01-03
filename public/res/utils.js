@@ -1,12 +1,12 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"storage",
 	"crel",
 	"xregexp",
 	"stacktrace",
 	"FileSaver"
-], function($, _, storage, crel, XRegExp, printStackTrace, saveAs) {
+], function( _, storage, crel, XRegExp, printStackTrace, saveAs) {
 
 	var utils = {};
 
@@ -315,6 +315,7 @@ define([
 		return result;
 	};
 
+	/*
 	var openedTooltip;
 	utils.createTooltip = function(selector, content) {
 		_.each(document.querySelectorAll(selector), function(tooltipElt) {
@@ -336,6 +337,7 @@ define([
 			});
 		});
 	};
+	*/
 
 	// Create an centered popup window
 	utils.popupWindow = function(url, title, width, height) {
@@ -407,6 +409,7 @@ define([
 				redirectCallbackCancel && redirectCallbackCancel();
 			});
 		});
+		/*
 		$(document).on('click', function() {
 			// Close opened tooltip if any
 			openedTooltip && openedTooltip.tooltip('hide');
@@ -416,6 +419,7 @@ define([
 			// Avoid tooltip to close when clicking inside
 			evt.stopPropagation();
 		});
+*/
 	};
 
 	utils.lockUI = function(cb) {

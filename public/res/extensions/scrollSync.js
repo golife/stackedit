@@ -1,9 +1,9 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"classes/Extension",
 	"text!html/scrollSyncSettingsBlock.html"
-], function($, _, Extension, scrollSyncSettingsBlockHTML) {
+], function(_, Extension, scrollSyncSettingsBlockHTML) {
 
 	var scrollSync = new Extension("scrollSync", "Scroll Sync", true, true);
 	scrollSync.settingsBlock = scrollSyncSettingsBlockHTML;

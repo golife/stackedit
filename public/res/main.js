@@ -15,7 +15,7 @@ requirejs.config({
 		}
 	],
 	paths: {
-		jquery: 'bower-libs/jquery/jquery',
+		// jquery: 'bower-libs/jquery/jquery',
 		underscore: 'bower-libs/underscore/underscore',
 		crel: 'bower-libs/crel/crel',
 		jgrowl: 'bower-libs/jgrowl/jquery.jgrowl',
@@ -82,7 +82,7 @@ requirejs.config({
 		],
 		jgrowl: {
 			deps: [
-				'jquery'
+				
 			],
 			exports: 'jQuery.jGrowl'
 		},
@@ -122,7 +122,7 @@ requirejs.config({
 		],
 		toMarkdown: {
 			deps: [
-				'jquery'
+				
 			],
 			exports: 'toMarkdown'
 		},
@@ -145,10 +145,10 @@ requirejs.config({
 			exports: 'Tour'
 		},
 		bootstrap: [
-			'jquery'
+			
 		],
 		'jquery-waitforimages': [
-			'jquery'
+			
 		],
 		pagedown: [
 			'libs/Markdown.Converter'
@@ -180,7 +180,7 @@ if(window.baseDir.indexOf('-min') !== -1) {
 // RequireJS entry point. By requiring synchronizer, publisher, sharing and
 // media-importer, we are actually loading all the modules
 require([
-	"jquery",
+	// "jquery",
 	"rangy",
 	"core",
 	"eventMgr",
@@ -190,8 +190,8 @@ require([
 	// "mediaImporter",
 	"css",
 	"rangy-cssclassapplier",
-	// themeModule
-], function($, rangy, core) {
+	themeModule
+], function( rangy, core) {
 	if(window.noStart) {
 		return;
 	}

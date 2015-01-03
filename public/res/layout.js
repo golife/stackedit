@@ -1,5 +1,5 @@
 define([
-	'jquery',
+	// 'jquery',
 	'underscore',
 	'utils',
 	'constants',
@@ -8,7 +8,7 @@ define([
 	'crel',
 	'mousetrap',
 	'hammerjs'
-], function($, _, utils, constants, settings, eventMgr, crel, mousetrap, hammer) {
+], function( _, utils, constants, settings, eventMgr, crel, mousetrap, hammer) {
 	var layout = {};
 
 	var resizerSize = 32;
@@ -400,7 +400,6 @@ define([
 
 	// 入口
 	layout.init = function() {
-		return;
 
 		var isModalShown = 0;
 		$(document.body).on('show.bs.modal', '.modal', function() {
@@ -443,6 +442,7 @@ define([
 		$navbarDropdownBtnElt = navbar.$elt.find('.buttons-dropdown');
 		navbarTitleContainerElt = navbar.elt.querySelector('.title-container');
 		$navbarTitleElt = navbar.$elt.find('.file-title-navbar, .input-file-title');
+		return;
 
 		// Fix a weird viewport behavior using pageup/pagedown in Webkit
 		$([
@@ -584,7 +584,9 @@ define([
 		resizeAll();
 	};
 
+
 	eventMgr.addListener('onReady', function() {
+		return;
 		previewButtons.x = previewButtonsOffset.x;
 		previewButtons.y = previewButtonsOffset.y;
 		previewButtons.applyCss();

@@ -1,57 +1,5 @@
-.form-control:focus {
-  border-color: #eeeeee;
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px rgba(128, 128, 128, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px rgba(128, 128, 128, 0.6);
-}
-.form-control:focus {
-  border-color: rgba(79, 161, 219, 0.5);
-  outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px #4fa1db;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px #4fa1db;
-}
-@media (min-width: 768px) {
-  .navbar-form .col-sm-1 {
-    width: 8.33333333% !important;
-  }
-  .navbar-form .col-sm-2 {
-    width: 16.66666667% !important;
-  }
-  .navbar-form .col-sm-3 {
-    width: 25% !important;
-  }
-  .navbar-form .col-sm-4 {
-    width: 33.33333333% !important;
-  }
-  .navbar-form .col-sm-5 {
-    width: 41.66666667% !important;
-  }
-  .navbar-form .col-sm-6 {
-    width: 50% !important;
-  }
-  .navbar-form .col-sm-7 {
-    width: 58.33333333% !important;
-  }
-  .navbar-form .col-sm-8 {
-    width: 66.66666667% !important;
-  }
-  .navbar-form .col-sm-9 {
-    width: 75% !important;
-  }
-  .navbar-form .col-sm-10 {
-    width: 83.33333333% !important;
-  }
-  .navbar-form .col-sm-11 {
-    width: 91.66666667% !important;
-  }
-  .navbar-form .col-sm-12 {
-    width: 100% !important;
-  }
-}
-.navbar-form * {
-  float: none;
-}
-/** lifelife */
+
+/* lifelife */
 /*
 
 Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
@@ -2227,6 +2175,24 @@ body.rtl .container {
 .open .dropdown-toggle.alertify-button-cancel {
   background-image: none;
 }
+.alertify-button-cancel.disabled,
+.alertify-button-cancel[disabled],
+fieldset[disabled] .alertify-button-cancel,
+.alertify-button-cancel.disabled:hover,
+.alertify-button-cancel[disabled]:hover,
+fieldset[disabled] .alertify-button-cancel:hover,
+.alertify-button-cancel.disabled:focus,
+.alertify-button-cancel[disabled]:focus,
+fieldset[disabled] .alertify-button-cancel:focus,
+.alertify-button-cancel.disabled:active,
+.alertify-button-cancel[disabled]:active,
+fieldset[disabled] .alertify-button-cancel:active,
+.alertify-button-cancel.disabled.active,
+.alertify-button-cancel[disabled].active,
+fieldset[disabled] .alertify-button-cancel.active {
+  background-color: #ffffff;
+  border-color: rgba(238, 238, 238, 0.75);
+}
 .alertify-button-cancel .badge {
   color: #ffffff;
   background-color: #fff;
@@ -2249,6 +2215,24 @@ body.rtl .container {
 .alertify-button-ok.active,
 .open .dropdown-toggle.alertify-button-ok {
   background-image: none;
+}
+.alertify-button-ok.disabled,
+.alertify-button-ok[disabled],
+fieldset[disabled] .alertify-button-ok,
+.alertify-button-ok.disabled:hover,
+.alertify-button-ok[disabled]:hover,
+fieldset[disabled] .alertify-button-ok:hover,
+.alertify-button-ok.disabled:focus,
+.alertify-button-ok[disabled]:focus,
+fieldset[disabled] .alertify-button-ok:focus,
+.alertify-button-ok.disabled:active,
+.alertify-button-ok[disabled]:active,
+fieldset[disabled] .alertify-button-ok:active,
+.alertify-button-ok.disabled.active,
+.alertify-button-ok[disabled].active,
+fieldset[disabled] .alertify-button-ok.active {
+  background-color: #4fa1db;
+  border-color: rgba(128, 128, 128, 0.05);
 }
 .alertify-button-ok .badge {
   color: #4fa1db;
@@ -2408,6 +2392,9 @@ div.jGrowl div.jGrowl-closer {
 /* Colors */
 /* Sizes */
 /* Bootstrap */
+/**
+ * start -----------
+ */
 body {
   tab-size: 4;
   text-align: start;
@@ -3829,24 +3816,6 @@ div.jGrowl div.jGrowl-notification {
     padding: 0 50px !important;
   }
 }
-.navbar-default {
-  background-color: #4a4a4a;
-  border-color: #393939;
-}
-.btn-success {
-  color: #dddddd;
-  background-color: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0);
-}
-.btn-success.disabled {
-  background-color: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0);
-}
-.btn-info {
-  color: rgba(128, 128, 128, 0.35);
-  background-color: rgba(0, 0, 0, 0);
-  border-color: rgba(0, 0, 0, 0);
-}
 .buttons-dropdown .dropdown-menu .btn-success {
   color: #4d4d4d !important;
 }
@@ -3887,25 +3856,4 @@ div.jGrowl div.jGrowl-notification {
 .modal-document-manager .btn-default:active,
 .open .modal-document-manager .btn-default.dropdown-toggle {
   border-color: rgba(128, 128, 128, 0.1);
-}
-
-
-.layout-wrapper-l1, .layout-wrapper-l2, .layout-wrapper-l3 {
-  left: 0;
-  right:0;
-  bottom: 0;
-  top: 0;
-}
-.layout-wrapper-l3  {
-  top: 50px;
-}
-#wmd-input {
-  top: 0;
-  width: 300px;
-  bottom: 0;
-}
-.preview-panel {
-  left: 300px;
-  right: 0;
-  bottom: 0;
 }

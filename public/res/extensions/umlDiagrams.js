@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"utils",
 	"logger",
@@ -8,7 +8,7 @@ define([
 	'crel',
 	'Diagram',
 	'flow-chart'
-], function($, _, utils, logger, Extension, umlDiagramsSettingsBlockHTML, crel, Diagram, flowChart) {
+], function(_, utils, logger, Extension, umlDiagramsSettingsBlockHTML, crel, Diagram, flowChart) {
 
 	var umlDiagrams = new Extension("umlDiagrams", "UML Diagrams", true);
 	umlDiagrams.settingsBlock = umlDiagramsSettingsBlockHTML;

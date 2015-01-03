@@ -1,5 +1,5 @@
 define([
-	"jquery",
+	// "jquery",
 	"underscore",
 	"utils",
 	"mousetrap",
@@ -7,7 +7,7 @@ define([
 	"text!extensions/shortcutsDefaultMapping.settings",
 	"text!html/shortcutsSettingsBlock.html",
 	"text!html/tooltipSettingsShortcutsExtension.html"
-], function($, _, utils, mousetrap, Extension, shortcutsDefaultMapping, shortcutsSettingsBlockHTML, tooltipSettingsShortcutsExtensionHTML) {
+], function(_, utils, mousetrap, Extension, shortcutsDefaultMapping, shortcutsSettingsBlockHTML, tooltipSettingsShortcutsExtensionHTML) {
 
 	var shortcuts = new Extension("shortcuts", "Shortcuts", true, true);
 	shortcuts.settingsBlock = shortcutsSettingsBlockHTML;

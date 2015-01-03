@@ -1,6 +1,5 @@
 /*globals Markdown, requirejs */
 define([
-	"jquery",
 	"underscore",
 	"crel",
 	"editor",
@@ -17,7 +16,7 @@ define([
 	"text!html/tooltipSettingsPdfOptions.html",
 	"storage",
 	'pagedown'
-], function($, _, crel, editor, layout, constants, utils, storage, settings, eventMgr, /*MonetizeJS, */bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
+], function( _, crel, editor, layout, constants, utils, storage, settings, eventMgr, /*MonetizeJS, */bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
 
 	var core = {};
 
@@ -240,16 +239,18 @@ define([
 		// Detect user activity
 		$(document).mousemove(setUserActive).keypress(setUserActive);
 
-		// 布局, 一些事件, 比如打开左侧menu
-		layout.init();
-		editor.init();
-
+		// 先发送事件, 不然partialRendering有问题
 		eventMgr.onReady();
 
+		// 布局, 一些事件, 比如打开左侧menu
+		// layout.init();
+		core.initEditorFirst();
+		editor.init();
+
 		// life
-		var fileDesc = {content: ""};
-		eventMgr.onFileSelected(fileDesc);
-		core.initEditor(fileDesc);
+		// var fileDesc = {content: ""};
+		// eventMgr.onFileSelected(fileDesc);
+		// core.initEditor(fileDesc);
 	};
 
 	// Other initialization that are not prioritary
@@ -412,24 +413,9 @@ define([
 			utils.resetModalInputs();
 		});
 
-		utils.createTooltip(".tooltip-lazy-rendering", 'Disable preview rendering while typing in order to offload CPU. Refresh preview after 500 ms of inactivity.');
-		utils.createTooltip(".tooltip-default-content", [
-			'Thanks for supporting StackEdit by adding a backlink in your documents!<br/><br/>',
-			'<b class="text-danger">NOTE: Backlinks in Stack Exchange Q/A are not welcome.</b>'
-		].join(''));
-		utils.createTooltip(".tooltip-template", settingsTemplateTooltipHTML);
-		utils.createTooltip(".tooltip-pdf-options", settingsPdfOptionsTooltipHTML);
-
 		// Avoid dropdown panels to close on click
 		$("div.dropdown-menu").click(function(e) {
 			e.stopPropagation();
-		});
-
-		// Non unique window dialog
-		$('.modal-non-unique').modal({
-			backdrop: "static",
-			keyboard: false,
-			show: false
 		});
 
 		// Load images
