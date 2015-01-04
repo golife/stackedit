@@ -3081,8 +3081,7 @@ a.input-group-addon {
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 20px;
-  margin-right: -20px;
-  width: 330px;
+  width: 300px;
 }
 .extension-preview-buttons .markdown-syntax {
   white-space: normal;
@@ -3625,6 +3624,7 @@ a.input-group-addon {
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 0 3px;
 }
 #mdEditor .preview-panel {
   left: 300px;

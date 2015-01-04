@@ -1353,7 +1353,39 @@
             });
         }
         */
+       
+        // life 新添加函数
+        // life
+        function insertLinkLife(link, text) {
+            inputBox.focus();
+            if (undoManager) {
+                undoManager.setCommandMode();
+            }
 
+            var state = new TextareaState(panels);
+
+            if (!state) {
+                return;
+            }
+
+            var chunks = state.getChunks(); // 得到chunk
+            var fixupInputArea = function () {
+                inputBox.focus();
+
+                if (chunks) {
+                    state.setChunks(chunks);
+                }
+
+                state.restore();
+                previewManager.refresh();
+            };
+
+            var a = commandProto.insertLink(chunks, fixupInputArea, link, text);
+            if(!a) fixupInputArea();
+        }
+       
+        // life
+        MD.insertLink = insertLinkLife;
 
         // Perform the button's action.
         function doClick(button) {
@@ -1746,6 +1778,56 @@
         });
     }
 
+     // life 添加
+    commandProto.insertLink = function (chunk, postProcessing, link, text) {
+        isImage = false;
+        chunk.trimWhitespace();
+        chunk.findTags(/\s*!?\[/, /\][ ]?(?:\n[ ]*)?(\[.*?\])?/);
+        var background;
+
+        if (chunk.endTag.length > 1 && chunk.startTag.length > 0) {
+
+            chunk.startTag = chunk.startTag.replace(/!?\[/, "");
+            chunk.endTag = "";
+            this.addLinkDef(chunk, null);
+
+        }
+        else {
+            
+            // We're moving start and end tag back into the selection, since (as we're in the else block) we're not
+            // *removing* a link, but *adding* one, so whatever findTags() found is now back to being part of the
+            // link text. linkEnteredCallback takes care of escaping any brackets.
+            chunk.selection = chunk.startTag + chunk.selection + chunk.endTag;
+            chunk.startTag = chunk.endTag = "";
+
+            if (/\n\n/.test(chunk.selection)) {
+                this.addLinkDef(chunk, null);
+                return;
+            }
+            var that = this;
+            // The function to be executed when you enter a link and press OK or Cancel.
+            // Marks up the link and adds the ref.
+            var linkEnteredCallback = function (link) {
+                background.parentNode.removeChild(background);
+
+                if (link !== null) {
+                    chunk.selection = (" " + chunk.selection).replace(/([^\\](?:\\\\)*)(?=[[\]])/g, "$1\\").substr(1);
+
+                    chunk.startTag = isImage ? "![" : "[";
+                    //chunk.endTag = "][" + num + "]";
+                    chunk.endTag = "](" + properlyEncoded(link) + ")";
+
+                    chunk.selection = text;
+                }
+                postProcessing();
+            };
+
+            background = ui.createBackground();
+            linkEnteredCallback(link);
+            return true;
+        }
+    };
+
     commandProto.doLinkOrImage = function (chunk, postProcessing, isImage) {
 
         chunk.trimWhitespace();
@@ -1821,6 +1903,7 @@
                 }
                 postProcessing();
             };
+
 
             background = ui.createBackground();
 

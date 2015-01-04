@@ -19,6 +19,8 @@ define([
 ], function( _, crel, editor, layout, constants, utils, storage, settings, eventMgr, /*MonetizeJS, */bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
 
 	var core = {};
+	// life, common.js
+	MD = editor;
 
 	// Used to detect user activity
 	var isUserReal = false;
@@ -162,6 +164,8 @@ define([
 			undoManager: editor.undoMgr
 		});
 
+		MD.insertLink2 = pagedownEditor.insertLink;
+
 		// Custom insert link dialog
 		pagedownEditor.hooks.set("insertLinkDialog", function(callback) {
 			core.insertLinkCallback = callback;
@@ -176,6 +180,11 @@ define([
 				return true;
 			}
 			utils.resetModalInputs();
+			var ifr = $("#leauiIfrForMD");
+			if(!ifr.attr('src')) {
+				ifr.attr('src', '/tinymce/plugins/leaui_image/index.html?md=1');
+			}
+
 			$(".modal-insert-image").modal();
 			return true;
 		});
@@ -270,7 +279,7 @@ define([
 			// Focus on the editor when modal is gone
 			editor.focus();
 			// Revert to current theme when settings modal is closed
-			applyTheme(window.theme);
+			// applyTheme(window.theme);
 		}).on('keypress', '.modal', function(e) {
 			// Handle enter key in modals
 			if(e.which == 13 && !$(e.target).is("textarea")) {
@@ -286,9 +295,12 @@ define([
 				core.insertLinkCallback = undefined;
 			}
 		});
+		// 插入图片
 		$(".action-insert-image").click(function(e) {
-			var value = utils.getInputTextValue($("#input-insert-image"), e);
-			if(value !== undefined) {
+			// 得到图片链接或图片
+			var value = document.mdImageManager.mdGetImgSrc();
+			// var value = utils.getInputTextValue($("#input-insert-image"), e);
+			if(value) {
 				core.insertLinkCallback(value);
 				core.insertLinkCallback = undefined;
 			}
@@ -302,116 +314,8 @@ define([
 			}
 		});
 
-		// Settings loading/saving
-		$(".action-load-settings").click(function() {
-			loadSettings();
-		});
-		$(".action-apply-settings").click(function(e) {
-			saveSettings(e);
-			if(!e.isPropagationStopped()) {
-				window.location.reload();
-			}
-		});
-		$('.action-add-google-drive-account').click(function() {
-			if(settings.gdriveMultiAccount === 3) {
-				return;
-			}
-			settings.gdriveMultiAccount++;
-			storage.settings = JSON.stringify(settings);
-			window.location.reload();
-		});
-
 		// Hot theme switcher in the settings
 		var currentTheme = window.theme;
-
-		function applyTheme(theme) {
-			theme = theme || 'default';
-			if(currentTheme != theme) {
-				var themeModule = "less!themes/" + theme;
-				if(window.baseDir.indexOf('-min') !== -1) {
-					themeModule = "css!themes/" + theme;
-				}
-				// Undefine the module in RequireJS
-				requirejs.undef(themeModule);
-				// Then reload the style
-				require([
-					themeModule
-				]);
-				currentTheme = theme;
-			}
-		}
-
-		$themeInputElt = $("#input-settings-theme");
-		$themeInputElt.on("change", function() {
-			applyTheme(this.value);
-		});
-
-		// Import docs and settings
-		$(".action-import-docs-settings").click(function() {
-			$("#input-file-import-docs-settings").click();
-		});
-		var newstorage;
-		$("#input-file-import-docs-settings").change(function(evt) {
-			var files = (evt.dataTransfer || evt.target).files;
-			$(".modal-settings").modal("hide");
-			_.each(files, function(file) {
-				var reader = new FileReader();
-				reader.onload = (function(importedFile) {
-					return function(e) {
-						try {
-							newstorage = JSON.parse(e.target.result);
-							// Compare storage version
-							var newVersion = parseInt(newstorage.version.match(/^v(\d+)$/)[1], 10);
-							var currentVersion = parseInt(storage.version.match(/^v(\d+)$/)[1], 10);
-							if(newVersion > currentVersion) {
-								// We manage storage upgrade, not downgrade
-								eventMgr.onError("Incompatible version. Please upgrade StackEdit.");
-							} else {
-								$('.modal-import-docs-settings').modal('show');
-							}
-						}
-						catch(exc) {
-							eventMgr.onError("Wrong format: " + importedFile.name);
-						}
-						$("#input-file-import-docs-settings").val('');
-					};
-				})(file);
-				reader.readAsText(file);
-			});
-		});
-		$(".action-import-docs-settings-confirm").click(function() {
-			storage.clear();
-			var allowedKeys = /^file\.|^folder\.|^publish\.|^settings$|^sync\.|^google\.|^author\.|^themeV4$|^version$/;
-			_.each(newstorage, function(value, key) {
-				if(allowedKeys.test(key)) {
-					storage[key] = value;
-				}
-			});
-			window.location.reload();
-		});
-		// Export settings
-		$(".action-export-docs-settings").click(function() {
-			utils.saveAs(JSON.stringify(storage), "StackEdit local storage.json");
-		});
-
-		$(".action-default-settings").click(function() {
-			storage.removeItem("settings");
-			storage.removeItem("theme");
-			if(!settings.dropboxFullAccess) {
-				storage.removeItem('dropbox.lastChangeId');
-			}
-			window.location.reload();
-		});
-
-		$(".action-app-reset").click(function() {
-			storage.clear();
-			window.location.reload();
-		});
-
-		// Reset inputs
-		$(".action-reset-input").click(function() {
-			utils.resetModalInputs();
-		});
 
 		// Avoid dropdown panels to close on click
 		$("div.dropdown-menu").click(function(e) {

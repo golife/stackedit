@@ -3081,8 +3081,7 @@ a.input-group-addon {
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 20px;
-  margin-right: -20px;
-  width: 330px;
+  width: 300px;
 }
 .extension-preview-buttons .markdown-syntax {
   white-space: normal;
