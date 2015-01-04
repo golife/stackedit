@@ -71,7 +71,7 @@ define([
 	};
 
 	shortcuts.onReady = function() {
-		utils.createTooltip(".tooltip-shortcuts-extension", tooltipSettingsShortcutsExtensionHTML);
+		// utils.createTooltip(".tooltip-shortcuts-extension", tooltipSettingsShortcutsExtensionHTML);
 	};
 
 	return shortcuts;

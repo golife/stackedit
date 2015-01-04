@@ -3,9 +3,8 @@ define([
     "underscore",
     "utils",
     "classes/Extension",
-    "text!html/buttonToc.html",
     "text!html/tocSettingsBlock.html",
-], function(_, utils, Extension, buttonTocHTML, tocSettingsBlockHTML) {
+], function(_, utils, Extension, tocSettingsBlockHTML) {
 
     var toc = new Extension("toc", "Table of Contents", true);
     toc.settingsBlock = tocSettingsBlockHTML;
@@ -27,11 +26,13 @@ define([
         newConfig.button = utils.getInputChecked("#input-toc-button");
     };
 
+    /*
     toc.onCreatePreviewButton = function() {
         if(toc.config.button) {
             return buttonTocHTML;
         }
     };
+    */
 
     // TOC element description
     function TocElement(tagName, anchor, text) {
@@ -136,6 +137,19 @@ define([
             _.each(tocEltList, function(elt) {
                 elt.innerHTML = htmlToc;
             });
+
+            $("#leanoteNavContentMd").height("auto"); // auto
+            try {
+                if(!$(htmlToc).text()) {
+                    $("#leanoteNavContentMd").html("&nbsp; &nbsp; Nothing...");
+                }
+            } catch(e) {}
+            // 这里, resize Height
+            var curH = $("#leanoteNavContentMd").height();
+            var pH = $("#mdEditor").height()-100;
+            if(curH > pH) {
+                $("#leanoteNavContentMd").height(pH);
+            }
         });
     };
 

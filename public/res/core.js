@@ -427,13 +427,13 @@ define([
 			}
 		});
 
-		if(window.viewerMode === false) {
-			// Load theme list
-			var themeOptions = _.reduce(constants.THEME_LIST, function(themeOptions, name, value) {
-				return themeOptions + '<option value="' + value + '">' + name + '</option>';
-			}, '');
-			document.getElementById('input-settings-theme').innerHTML = themeOptions;
-		}
+	// 	if(window.viewerMode === false) {
+	// 		// Load theme list
+	// 		var themeOptions = _.reduce(constants.THEME_LIST, function(themeOptions, name, value) {
+	// 			return themeOptions + '<option value="' + value + '">' + name + '</option>';
+	// 		}, '');
+	// 		document.getElementById('input-settings-theme').innerHTML = themeOptions;
+	// 	}
 	});
 
 	return core;

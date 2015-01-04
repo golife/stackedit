@@ -433,6 +433,12 @@ define([
 	// 设置值
 	editor.setValue = setValue;
 
+	// life
+	// 为page.js的拖动编辑与预览宽度用
+	editor.onResize = function(){ 
+		eventMgr.onLayoutResize(); 
+	}
+
 	var contentQueue = false;
 	editor.setContent = function(content) {
 		if(!fileDesc) {
@@ -441,10 +447,12 @@ define([
 		// 很可能还没init
 		if(contentElt) {
 			fileDesc = {content: content};
-			eventMgr.onFileSelected(fileDesc);
-			log(contentElt);
-			log(content);
+			// log(content);
+			// log(contentElt);
 			contentElt.textContent = content;
+			// setTimeout(function(){ 
+				eventMgr.onFileSelected(fileDesc);
+			// });
 			// Force this since the content could be the same
 			checkContentChange();
 			contentQueue = false;

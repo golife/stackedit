@@ -3046,13 +3046,15 @@ a.input-group-addon {
 .extension-preview-buttons {
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 30px;
   bottom: auto;
   z-index: 40;
   background-color: #f0f0f0;
   border: 1px solid #dfdfdf;
   border-radius: 4px;
-  cursor: move;
+}
+.extension-preview-buttons .btn-success {
+  padding: 3px;
 }
 .extension-preview-buttons.animate {
   -webkit-transition: 350ms ease-in-out all;
@@ -3066,6 +3068,10 @@ a.input-group-addon {
   margin-top: 6px;
   margin-bottom: 6px;
   padding-bottom: 20px;
+}
+.extension-preview-buttons .dropdown-menu h3 {
+  margin: 3px;
+  magin-left: 10px;
 }
 .extension-preview-buttons hr {
   margin: 0;
@@ -3082,12 +3088,15 @@ a.input-group-addon {
   white-space: normal;
 }
 .extension-preview-buttons .table-of-contents {
-  padding: 20px 0 15px;
+  padding: 10px 0 15px;
   margin-left: -10px;
 }
 .extension-preview-buttons .table-of-contents ul {
   margin-left: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
+}
+.extension-preview-buttons .table-of-contents li {
+  height: auto;
 }
 .extension-preview-buttons .stat-button .value {
   vertical-align: text-top;
@@ -3201,17 +3210,17 @@ a.input-group-addon {
   transition: transform 350ms ease-in-out;
 }
 .layout-resizer {
+  left: 0;
+  width: 22px;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 32px;
-  height: 32px;
+  bottom: 0;
 }
 .layout-resizer.open {
-  cursor: e-resize;
+  cursor: col-resize;
 }
 .layout-vertical .layout-resizer.open {
-  cursor: s-resize;
+  cursor: col-resize;
 }
 .layout-toggler {
   position: absolute;
@@ -3219,11 +3228,19 @@ a.input-group-addon {
   left: 0;
   padding: 0;
   margin: 0;
-  width: 32px;
-  height: 32px;
+  width: 22px;
 }
 .layout-toggler i {
   font-size: 22px;
+}
+.layout-toggler.layout-toggler-preview {
+  top: 50%;
+  margin-top: -15px;
+  width: 22px;
+  text-align: center;
+}
+.layout-toggler.layout-toggler-preview:hover {
+  background: #ddd !important;
 }
 .layout-animate .layout-toggler.layout-toggler-preview {
   -webkit-transition: -webkit-transform 350ms ease-in-out;
@@ -3233,6 +3250,8 @@ a.input-group-addon {
 }
 .layout-toggler.layout-toggler-preview i:before {
   content: '\e87d';
+  margin: 0;
+  padding: 0;
 }
 .layout-toggler.layout-toggler-preview.open > i:before {
   content: '\e87e';
@@ -3282,6 +3301,8 @@ a.input-group-addon {
   src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'), url("../font/PTSans-BoldItalic-webfont.woff") format('woff');
 }
 #wmd-input {
+  padding: 0 3px;
+  padding-top: 3px;
   position: absolute;
   top: 0;
   left: 0;
@@ -3303,6 +3324,7 @@ a.input-group-addon {
 }
 #wmd-input > .editor-content {
   padding-bottom: 230px;
+  outline: none;
 }
 #wmd-input > .editor-margin {
   position: absolute;
@@ -3563,6 +3585,7 @@ a.input-group-addon {
 #mdEditor .navbar-default {
   background-color: #f0f0f0;
   border: none;
+  border-bottom: 1px solid #ccc;
   padding: 0;
   height: 30px;
   min-height: 30px;
@@ -3579,7 +3602,7 @@ a.input-group-addon {
   border-color: rgba(0, 0, 0, 0);
 }
 #mdEditor .btn-info {
-  color: rgba(128, 128, 128, 0.35);
+  color: rgba(128, 128, 128, 0.55);
   background-color: rgba(0, 0, 0, 0);
   border-color: rgba(0, 0, 0, 0);
 }
@@ -3599,10 +3622,9 @@ a.input-group-addon {
 }
 #mdEditor #wmd-input {
   top: 0;
-  width: 300px;
+  left: 0;
+  right: 0;
   bottom: 0;
-  padding: 0 3px;
-  padding-top: 3px;
 }
 #mdEditor .preview-panel {
   left: 300px;
@@ -3612,12 +3634,6 @@ a.input-group-addon {
 #mdEditor .wmd-button,
 #mdEditor .preview-button {
   width: auto;
-}
-#mdEditor .extension-preview-buttons {
-  top: 35px;
-}
-#mdEditor .extension-preview-buttons .btn-success {
-  padding: 3px;
 }
 .buttons-dropdown .dropdown-menu #mdEditor .btn-success {
   color: #4d4d4d !important;
