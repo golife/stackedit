@@ -3087,7 +3087,7 @@ a.input-group-addon {
   white-space: normal;
 }
 .extension-preview-buttons .table-of-contents {
-  padding: 10px 0 15px;
+  padding: 10px 0 10px;
   margin-left: -10px;
 }
 .extension-preview-buttons .table-of-contents ul {
@@ -3518,7 +3518,8 @@ a.input-group-addon {
 }
 .find-replace {
   position: absolute;
-  bottom: 0;
+  bottom: 3px;
+  left: 3px;
   width: 410px;
   background-color: #f7f7f5;
   padding: 15px 20px;
