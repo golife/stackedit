@@ -1165,7 +1165,7 @@ a.input-group-addon {
   word-break: normal;
 }
 #wmd-input > .editor-content {
-  padding-bottom: 230px;
+  padding-bottom: 10px;
   outline: none;
 }
 #wmd-input > .editor-margin {
@@ -1294,7 +1294,7 @@ a.input-group-addon {
 #wmd-input .h4,
 #wmd-input .h5,
 #wmd-input .h6 {
-  font-weight: 600;
+  font-weight: 300;
 }
 #wmd-input .h1 .md-hash,
 #wmd-input .h2 .md-hash,

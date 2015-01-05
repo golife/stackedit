@@ -218,8 +218,8 @@ gulp.task('default', function(cb) {
 			'jshint',
 			'requirejs',
 			'less',
-			'copy-font',
-			'copy-img'
+			// 'copy-font',
+			// 'copy-img'
 		],
 		'cache-manifest',
 		cb);

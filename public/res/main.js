@@ -189,8 +189,8 @@ require([
 	// "sharing",
 	// "mediaImporter",
 	"css",
-	"rangy-cssclassapplier",
-	themeModule
+	"rangy-cssclassapplier"
+	// ,themeModule // 生产模式
 ], function( rangy, core) {
 	if(window.noStart) {
 		return;
