@@ -117,7 +117,7 @@ define([
 		*/
 		editor.hooks.chain("onPreviewRefresh", function() {
 			$('#preview-contents pre').addClass('prettyprint linenums');
-			prettify.prettyPrint()
+			prettify.prettyPrint();
 		});
 		Markdown.Extra.init(converter, extraOptions);
 	};
