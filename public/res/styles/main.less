@@ -1,5 +1,5 @@
 @import "base.less";
-@import "alertify.less";
+// @import "alertify.less";
 @import "../bower-libs/bootstrap-tour/src/less/bootstrap-tour.less";
 @import (less) "jquery.jgrowl.css";
 
@@ -570,253 +570,6 @@ a {
 	}
 }
 
-
-/*********************
- * Menu/Document panels
- *********************/
-
-// Common style
-.menu-panel, .document-panel {
-	height: 100%;
-	z-index: 30;
-	overflow: initial;
-    .toggle-button {
-    	background-color: @panel-button-bg-color;
-        height: @input-height-slim;
-        border-radius: 8px;
-		position: absolute;
-		margin-top: 6px;
-        .transition(~"border-width ease-in-out .15s, left ease-in-out 0.15s, right ease-in-out 0.15s, background-color ease-in-out 0.15s");
-        .box-shadow(@panel-button-box-shadow);
-        &:active {
-            .box-shadow(~"inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 1px rgba(0,0,0,.5)");
-        }
-        i {
-    		color: #737373;
-        	font-size: 14px;
-        }
-	}
-    & .toggle-button:hover, &.panel-open > .toggle-button {
-        border-width: 1px;
-	}
-	.panel-content {
-		overflow: auto;
-		padding-bottom: 30px;
-		height: 100%;
-		a > i {
-			color: inherit;
-		}
-	}
-}
-
-.menu-panel {
-	.layout-panel();
-	width: @menu-panel-width;
-	i {
-		margin-right: 8px;
-	}
-	small {
-		color: @dropdown-header-color;
-		padding-left: 30px;
-	}
-    .nav {
-        margin: 10px 0 20px;
-        > li > * {
-            padding: 8px 30px;
-        }
-        > li > a {
-            &:hover,
-            &:focus {
-                background-color: @transparent;
-            }
-        }
-    }
-	.alert {
-		padding: 10px;
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-    .toggle-button {
-        border-top: 4px solid fade(@logo-yellow, @panel-button-border-fade);
-        border-right: 5px solid fade(@logo-blue, @panel-button-border-fade);
-        border-bottom: 4px solid fade(@logo-orange, @panel-button-border-fade);
-	    right: -37px;
-		z-index: -1;
-		padding: 0 10px 0 50px;
-	}
-    & .toggle-button:hover, &.panel-open > .toggle-button {
-        right: -45px;
-	}
-	.panel-content {
-		background-color: @secondary-bg-light;
-		padding-top: 6px;
-		border-right: 1px solid @secondary-border-color-light;
-	}
-}
-
-.document-panel {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: @document-panel-width;
-	.toggle-button {
-        border-top: 4px solid fade(@logo-yellow, @panel-button-border-fade);
-        border-left: 5px solid fade(@logo-green, @panel-button-border-fade);
-        border-bottom: 4px solid fade(@logo-orange, @panel-button-border-fade);
-	    left: -37px;
-		padding: 0 50px 0 3px;
-		z-index: -1;
-		i.icon-folder-open {
-       		font-size: 19px;
-       		padding-bottom: 1px;
-       	}
-	}
-    & .toggle-button:hover, &.panel-open > .toggle-button {
-        left: -45px;
-	}
-	.panel-content {
-		background-color: @list-group-bg;
-		padding-top: 210px;
-        .viewer & {
-            padding-top: 75px;
-        }
-		border-left: 1px solid @secondary-border-color-light;
-		.icon-layers {
-			font-size: 135%;
-		}
-	}
-	.search-bar {
-		position: absolute;
-		background-color: @secondary-bg;
-		margin: -10px 25px 0;
-		padding: 15px 20px;
-		z-index: 3;
-		border: 1px solid @secondary-border-color;
-		border-radius: 6px;
-        .nav {
-            margin-bottom: 10px;
-            > li > a {
-                padding: 8px 15px;
-                &:hover,
-                &:focus {
-                    background-color: @transparent;
-                }
-            }
-        }
-	}
-	.list-group-item {
-		margin: 0;
-	}
-	.folder {
-		font-weight: bold;
-		color: @folder-color;
-		border-top-color: @modal-content-separator-color;
-	}
-	.list-group {
-		margin: 0;
-		.nav {
-			border: 0;
-			margin: 0;
-			.file {
-			    padding-left: 30px;
-			    padding-right: 30px;
-			}
-		}
-	}
-}
-
-// Dropdown document selector
-.dropdown-file-selector {
-	top: 6px;
-	right: 45px;
-	left: auto;
-	margin: 0;
-	min-width: 280px;
-	max-width: 400px;
-	overflow-x: hidden;
-	max-height: 400px;
-	overflow-y: auto;
-}
-
-
-/**************************
- * Document manager
- **************************/
-
-.modal-document-manager {
-	.nav-pills {
-		margin-bottom: 15px;
-	}
-
-	.list-group {
-    	.nav {
-    		margin-bottom: 30px;
-    		border: 0;
-    		margin: 0;
-    		.file {
-    		    padding-left: 20px;
-    		}
-    	}
-	}
-	.file-list .list-group-item {
-		background-color: @transparent;
-		padding: 0 3px;
-	}
-	margin-bottom: 0;
-
-	.input-rename {
-		width: 220px;
-		height: @input-height-slim;
-	}
-}
-
-.modal {
-	.list-group .list-group-item {
-		border-radius: @border-radius-base;
-	}
-	.list-group-item {
-		padding: 3px;
-		margin: 0;
-		border-left-width: 1px;
-		border-right-width: 1px;
-		i {
-			margin-right: 3px;
-		}
-		.btn {
-			float: right;
-			margin-right: 3px;
-			i {
-				margin: 0;
-				font-size: 105%;
-				&.icon-pencil {
-					font-size: 115%;
-				}
-			}
-		}
-	}
-	.folder, .document {
-		font-weight: bold;
-		color: @folder-color;
-		font-size: 15px;
-		background-color: @transparent;
-	}
-	.name, .date, .file-count {
-		padding: 9px 20px 9px 15px;
-	}
-	.name i {
-		&.icon-file, &.icon-folder {
-			margin-right: 8px;
-			font-size: 20px;
-			line-height: 15px;
-			margin-top: -2px;
-		}
-	}
-	.date {
-		font-weight: normal;
-	}
-}
-
-
 /********************
  * Extensions buttons
  ********************/
@@ -994,29 +747,6 @@ a {
 }
 
 
-/********************************
- * Publish/Sync/Share dialogs
- ********************************/
-
-.modal-manage-sync .sync-list,
-.modal-manage-publish .publish-list,
-.modal-manage-sharing .share-editor-list,
-.modal-manage-sharing .share-viewer-list {
-	margin-bottom: 20px;
-	.entry {
-		margin-bottom: 10px;
-	}
-}
-
-.publish-custom-template-collapse {
-	margin-bottom: 0;
-	textarea {
-		max-width: 100%;
-		min-height: 100px;
-	}
-}
-
-
 
 /*********************************
  * Layout
@@ -1069,21 +799,10 @@ a {
 		width: @resizer-size;
 		text-align: center;
 		i:before {
-			content: '\e87d';
-			margin: 0;
-			padding: 0;
+			content: "\f104";
 		}
 		&.open > i:before {
-			content: '\e87e';
-		}
-		.layout-vertical & {
-			line-height: 1.45;
-			i:before {
-				content: '\e87f';
-			}
-			&.open > i:before {
-				content: '\e880';
-			}
+			content: "\f105";
 		}
 	}
 	&.layout-toggler-navbar {
@@ -1100,7 +819,7 @@ a {
 /*****************************
  * Editor
  *****************************/
-
+/*
 @font-face {
     font-family: 'PT Sans';
     font-style: normal;
@@ -1125,6 +844,7 @@ a {
     font-weight: 700;
     src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'), url("../font/PTSans-BoldItalic-webfont.woff") format('woff');
 }
+*/
 
 #left-column {
 }
@@ -1132,7 +852,7 @@ a {
 	padding: 0 3px;
 	padding-top: 3px;
 	.layout-panel();
-	font-family: "PT Sans", sans-serif;
+	// font-family: "PT Sans", sans-serif;
 	line-height: @editor-line-weight;
     letter-spacing: normal;
     border-radius: 0;

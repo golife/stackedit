@@ -3,14 +3,14 @@ define([
 	"underscore",
 	"crel",
 	"editor",
-	"layout",
+	// "layout",
 	"constants",
 	"utils",
 	"storage",
 	"settings",
 	"eventMgr",
 	'pagedown'
-], function( _, crel, editor, layout, constants, utils, storage, settings, eventMgr) {
+], function( _, crel, editor, constants, utils, storage, settings, eventMgr) {
 
 	var core = {};
 
@@ -52,8 +52,12 @@ define([
 			}
 		};
 		converter.setOptions(options);
+		
 		pagedownEditor = new Markdown.Editor(converter, undefined, {
 			undoManager: editor.undoMgr
+			// ,
+			// helpButton: { handler: markdownHelp },
+	        // strings: "Markdown syntax"
 		});
 
 		MD.insertLink2 = pagedownEditor.insertLink;
@@ -92,21 +96,22 @@ define([
 		// Add customized buttons
 		var $btnGroupElt = $('.wmd-button-group1');
 		
-		$("#wmd-bold-button").append($('<i class="icon-bold">')).appendTo($btnGroupElt);
-		$("#wmd-italic-button").append($('<i class="icon-italic">')).appendTo($btnGroupElt);
+		$("#wmd-bold-button").append($('<i class="fa fa-bold">')).appendTo($btnGroupElt);
+		$("#wmd-italic-button").append($('<i class="fa fa-italic">')).appendTo($btnGroupElt);
 		$btnGroupElt = $('.wmd-button-group2');
-		$("#wmd-link-button").append($('<i class="icon-globe">')).appendTo($btnGroupElt);
-		$("#wmd-quote-button").append($('<i class="icon-indent-right">')).appendTo($btnGroupElt);
-		$("#wmd-code-button").append($('<i class="icon-code">')).appendTo($btnGroupElt);
-		$("#wmd-image-button").append($('<i class="icon-picture">')).appendTo($btnGroupElt);
+		$("#wmd-link-button").append($('<i class="fa fa-link">')).appendTo($btnGroupElt);
+		$("#wmd-quote-button").append($('<i class="fa fa-quote-left">')).appendTo($btnGroupElt);
+		$("#wmd-code-button").append($('<i class="fa fa-code">')).appendTo($btnGroupElt);
+		$("#wmd-image-button").append($('<i class="fa fa-picture-o">')).appendTo($btnGroupElt);
 		$btnGroupElt = $('.wmd-button-group3');
-		$("#wmd-olist-button").append($('<i class="icon-list-numbered">')).appendTo($btnGroupElt);
-		$("#wmd-ulist-button").append($('<i class="icon-list-bullet">')).appendTo($btnGroupElt);
-		$("#wmd-heading-button").append($('<i class="icon-text-height">')).appendTo($btnGroupElt);
-		$("#wmd-hr-button").append($('<i class="icon-ellipsis">')).appendTo($btnGroupElt);
+		$("#wmd-olist-button").append($('<i class="fa fa-list-ol">')).appendTo($btnGroupElt);
+		$("#wmd-ulist-button").append($('<i class="fa fa-list-ul">')).appendTo($btnGroupElt);
+		$("#wmd-heading-button").append($('<i class="fa fa-header">')).appendTo($btnGroupElt);
+		$("#wmd-hr-button").append($('<i class="fa fa-ellipsis-h">')).appendTo($btnGroupElt);
 		$btnGroupElt = $('.wmd-button-group5');
-		$("#wmd-undo-button").append($('<i class="icon-reply">')).appendTo($btnGroupElt);
-		$("#wmd-redo-button").append($('<i class="icon-forward">')).appendTo($btnGroupElt);
+		$("#wmd-undo-button").append($('<i class="fa fa-undo">')).appendTo($btnGroupElt);
+		$("#wmd-redo-button").append($('<i class="fa fa-repeat">')).appendTo($btnGroupElt);
+		$("#wmd-help-button").show();
 	};
 
 	core.initEditor = function(fileDescParam) {
@@ -209,6 +214,11 @@ define([
 		// Avoid dropdown panels to close on click
 		$("div.dropdown-menu").click(function(e) {
 			e.stopPropagation();
+		});
+
+		// 弹框显示markdown语法
+		$('#wmd-help-button').click(function() {
+	        window.open("http://leanote.com/blog/view/531b263bdfeb2c0ea9000002");
 		});
 
 		// Load images

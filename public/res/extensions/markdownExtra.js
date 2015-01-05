@@ -7,10 +7,10 @@ define([
 	"classes/Extension",
 	"text!html/markdownExtraSettingsBlock.html",
 	'google-code-prettify',
-	'highlightjs',
+	// 'highlightjs',
 	'crel',
 	'pagedownExtra'
-], function( _, utils, logger, Extension, markdownExtraSettingsBlockHTML, prettify, hljs) {
+], function( _, utils, logger, Extension, markdownExtraSettingsBlockHTML, prettify) {
 
 	var markdownExtra = new Extension("markdownExtra", "Markdown Extra", true);
 	markdownExtra.settingsBlock = markdownExtraSettingsBlockHTML;
@@ -101,6 +101,7 @@ define([
 				});
 			});
 		}
+		/*
 		if(markdownExtra.config.highlighter == "highlight") {
 			var previewContentsElt = document.getElementById('preview-contents');
 			editor.hooks.chain("onPreviewRefresh", function() {
@@ -113,6 +114,11 @@ define([
 		else if(markdownExtra.config.highlighter == "prettify") {
 			editor.hooks.chain("onPreviewRefresh", prettify.prettyPrint);
 		}
+		*/
+		editor.hooks.chain("onPreviewRefresh", function() {
+			$('#preview-contents pre').addClass('prettyprint linenums');
+			prettify.prettyPrint()
+		});
 		Markdown.Extra.init(converter, extraOptions);
 	};
 

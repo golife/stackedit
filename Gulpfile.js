@@ -89,7 +89,7 @@ gulp.task('requirejs', [
 	})
 		.pipe(uglify({
 			output: {
-				beautify: true,
+				beautify: false,
 				indent_level: 1
 			}
 		}))

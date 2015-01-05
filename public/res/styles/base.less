@@ -48,50 +48,118 @@
 
 /** lifelife */
 
-@import (less) "../libs/highlight/styles/default.css";
-@import (less) "../libs/fontello/css/fontello.css";
+// @import (less) "../libs/highlight/styles/default.css";
+// @import (less) "../libs/fontello/css/fontello.css";
 
 // start start what[]
 //==========================================================
 
 /* Pretty printing styles. Used with prettify.js. */
+pre.prettyprint  * {
+    font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+}
 
-/* SPAN elements with the classes below are added by prettyprint. */
-.pln { color: #000 }  /* plain text */
+pre.prettyprint {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word
+}
 
-.str { color: #080 }  /* string content */
-.kwd { color: #008 }  /* a keyword */
-.com { color: #800 }  /* a comment */
-.typ { color: #606 }  /* a type name */
-.lit { color: #066 }  /* a literal value */
-/* punctuation, lisp open bracket, lisp close bracket */
-.pun, .opn, .clo { color: #660 }
-.tag { color: #008 }  /* a markup tag name */
-.atn { color: #606 }  /* a markup attribute name */
-.atv { color: #080 }  /* a markup attribute value */
-.dec, .var { color: #606 }  /* a declaration; a variable name */
-.fun { color: red }  /* a function name */
+code.prettyprint,pre.prettyprint {
+    padding: 8px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -o-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    display: block
+}
 
-/* Put a border around prettyprinted code snippets. */
-pre.prettyprint { padding: 2px; border: 1px solid #888 }
+/*行号*/
+code.prettyprint .linenums,pre.prettyprint .linenums {
+    /*
+    -webkit-box-shadow: inset 0px 0 0 #f7f7f9,inset 0px 0 0 #ececf0;
+    -moz-box-shadow: inset 0px 0 0 #f7f7f9,inset 0px 0 0 #ececf0;
+    box-shadow: inset 0px 0 0 #f7f7f9,inset 0px 0 0 #ececf0
+    */
+}
 
-/* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
-li.L0,
-li.L1,
-li.L2,
-li.L3,
-li.L5,
-li.L6,
-li.L7,
-li.L8 { list-style-type: none }
-/* Alternate shading for lines */
-li.L1,
-li.L3,
-li.L5,
-li.L7,
-li.L9 { background: #eee }
+code.prettyprint ol.linenums,pre.prettyprint ol.linenums {
+    padding: 0 0 0 30px;
+    margin: 0;
+}
 
+code.prettyprint ol.linenums li,pre.prettyprint ol.linenums li {
+    padding-left: 0;
+    color: #bebec5;
+    line-height: 20px;
+}
+
+code.prettyprint .com,pre.prettyprint .com {
+    color: #93a1a1;
+    font-style: italic
+}
+
+code.prettyprint .lit,pre.prettyprint .lit {
+    color: #195f91
+}
+
+code.prettyprint .pun,pre.prettyprint .pun {
+    color: #93a1a1
+}
+
+code.prettyprint .opn,pre.prettyprint .opn {
+    color: #93a1a1
+}
+
+code.prettyprint .clo,pre.prettyprint .clo {
+    color: #93a1a1
+}
+
+code.prettyprint .fun,pre.prettyprint .fun {
+    color: #dc322f
+}
+
+code.prettyprint .str,pre.prettyprint .str {
+    color: #d14
+}
+
+code.prettyprint .atv,pre.prettyprint .atv {
+    color: #d14
+}
+
+code.prettyprint .kwd,pre.prettyprint .kwd {
+    color: #1e347b
+}
+
+code.prettyprint .tag,pre.prettyprint .tag {
+    color: #1e347b
+}
+
+code.prettyprint .typ,pre.prettyprint .typ {
+    color: #008080
+}
+
+code.prettyprint .atn,pre.prettyprint .atn {
+    color: #008080
+}
+
+code.prettyprint .dec,pre.prettyprint .dec {
+    color: #008080
+}
+
+code.prettyprint .var,pre.prettyprint .var {
+    color: #008080
+}
+
+code.prettyprint .pln,pre.prettyprint .pln {
+    color: #48484c
+}
 
 @body-bg: #fff;
 @text-color: #000;
@@ -111,6 +179,7 @@ li.L9 { background: #eee }
 @headings-font-family: inherit;
 @headings-font-weight: 300;
 
+/*
 @font-face {
   font-family: 'fontello';
   src: url('../font/fontello.svg#fontello') format('svg'),
@@ -168,7 +237,7 @@ li.L9 { background: #eee }
     font-weight: 700;
     src: local('Source Code Pro Bold'), local('SourceCodePro-Bold'), url("../font/SourceCodePro-Bold-webfont.woff") format('woff');
 }
-
+*/
 @font-family-sans-serif: "Source Sans Pro", sans-serif;
 @font-family-monospace: "Source Code Pro", monospace;
 
@@ -214,8 +283,6 @@ pre {
 }
 
 p,
-pre,
-pre.prettyprint,
 blockquote {
 	margin: 0 0 @p-margin;
 }
@@ -258,11 +325,13 @@ code {
     white-space: normal;
 }
 
-pre, pre.prettyprint {
+pre {
+    border-radius: 5px;
+}
+pre.prettyprint {
 	text-align: start;
 	border: 0;
 	padding: 10px 20px;
-	border-radius: 5px;
 	code {
 	    background-color: transparent !important;
 	}
@@ -358,124 +427,3 @@ kbd {
     font-size: 0.8em;
 }
 
-/***********************
- * Icons
- ***********************/
-
-[class^="icon-"], [class*=" icon-"] {
-	display: inline-block;
-	line-height: 1.35em;
-	vertical-align: middle;
-	background-repeat: no-repeat;
-}
-
-// Custom icons (not from Font Awesome)
-.icon-code {
-	font-size: 83%;
-    line-height: 1.65em;
-	&:before {
-    	margin-left: 0.1em;
-    	margin-right: 0.6em;
-	}
-}
-
-.icon-trash {
-	line-height: 1.50em;
-}
-
-.icon-folder-open {
-	font-size: 80%;
-	&:before {
-    	margin-right: 0.6em;
-	}
-}
-
-.icon-chart-bar {
-	font-size: 95%;
-	&:before {
-    	margin-left: 0.3em;
-    	margin-right: 0.3em;
-	}
-}
-
-.icon-comment-alt, .icon-chat {
-	font-size: 92%;
-    &:before {
-        margin-left: 0.1em;
-        margin-right: 0.4em;
-    }
-}
-
-.icon-file {
-    font-size: 104%;
-	margin-left: 0;
-	margin-right: 0;
-}
-
-.icon-link {
-    font-size: 104%;
-}
-
-// Provider's icons (the colored ones)
-[class^="icon-provider-"], [class*=" icon-provider-"] {
-	.img-retina('../img/icons.png', '../img/icons2x.png', 256px, 16px);
-	width: 18px;
-	height: 16px;
-	margin-top: -2px;
-	margin-left: 2px;
-}
-
-.icon-provider-stackedit {
-	background-position: 0 0;
-}
-
-.icon-provider-gdrive, .icon-provider-gdrivesec, .icon-provider-gdriveter {
-	background-position: -18px 0;
-}
-
-.icon-provider-dropbox {
-	background-position: -37px 0;
-}
-
-.icon-provider-github,.icon-provider-gist {
-	background-position: -54px 0;
-}
-
-.icon-provider-blogger, .icon-provider-bloggerpage {
-	background-position: -72px 0;
-}
-
-.icon-provider-tumblr {
-	background-position: -90px 0;
-}
-
-.icon-provider-wordpress {
-	background-position: -108px 0;
-}
-
-.icon-provider-ssh {
-	background-position: -126px 0;
-}
-
-.icon-provider-gplus {
-	background-position: -144px 0;
-}
-
-.icon-provider-couchdb {
-	background-position: -162px 0;
-}
-
-/*******************
- * RTL
- *******************/
-body.rtl {
-    #wmd-input,
-    #preview-contents,
-    .input-file-title,
-    .search-bar input,
-    .modal-document-manager input,
-    .comments-popover,
-    .container {
-        direction: rtl;
-    }
-}
