@@ -7,7 +7,6 @@ define([
 	"logger",
 	"classes/Extension",
 	"settings",
-	"text!html/settingsExtensionsAccordion.html",
 	"extensions/yamlFrontMatterParser",
 	"extensions/markdownSectionParser",
 	"extensions/partialRendering",
@@ -44,7 +43,7 @@ define([
 	"extensions/htmlSanitizer",
 	// "bootstrap",
 	"jquery-waitforimages"
-], function( _, crel, mousetrap, utils, logger, Extension, settings, settingsExtensionsAccordionHTML) {
+], function( _, crel, mousetrap, utils, logger, Extension, settings) {
 
 	var eventMgr = {};
 

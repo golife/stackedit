@@ -1,4 +1,4 @@
-/*globals Markdown, requirejs */
+/*globals MD:true, Markdown */
 define([
 	"underscore",
 	"crel",
@@ -9,17 +9,12 @@ define([
 	"storage",
 	"settings",
 	"eventMgr",
-	// "monetizejs",
-	"text!html/bodyEditor.html",
-	"text!html/bodyViewer.html",
-	"text!html/tooltipSettingsTemplate.html",
-	"text!html/tooltipSettingsPdfOptions.html",
-	"storage",
 	'pagedown'
-], function( _, crel, editor, layout, constants, utils, storage, settings, eventMgr, /*MonetizeJS, */bodyEditorHTML, bodyViewerHTML, settingsTemplateTooltipHTML, settingsPdfOptionsTooltipHTML) {
+], function( _, crel, editor, layout, constants, utils, storage, settings, eventMgr) {
 
 	var core = {};
-	// life, common.js
+
+	// life commonjs使用
 	MD = editor;
 
 	// Used to detect user activity
@@ -38,110 +33,7 @@ define([
 	}
 
 	// Load settings in settings dialog
-	var $themeInputElt;
-
-	function loadSettings() {
-
-		// Layout orientation
-		utils.setInputRadio("radio-layout-orientation", settings.layoutOrientation);
-		// Theme
-		utils.setInputValue($themeInputElt, window.theme);
-		$themeInputElt.change();
-		// Lazy rendering
-		utils.setInputChecked("#input-settings-lazy-rendering", settings.lazyRendering);
-		// Editor font class
-		utils.setInputRadio("radio-settings-editor-font-class", settings.editorFontClass);
-		// Font size ratio
-		utils.setInputValue("#input-settings-font-size", settings.fontSizeRatio);
-		// Max width ratio
-		utils.setInputValue("#input-settings-max-width", settings.maxWidthRatio);
-		// Cursor locking ratio
-		utils.setInputValue("#input-settings-cursor-focus", settings.cursorFocusRatio);
-		// Default content
-		utils.setInputValue("#textarea-settings-default-content", settings.defaultContent);
-		// Edit mode
-		utils.setInputRadio("radio-settings-edit-mode", settings.editMode);
-		// Commit message
-		utils.setInputValue("#input-settings-publish-commit-msg", settings.commitMsg);
-		// Markdown MIME type
-		utils.setInputValue("#input-settings-markdown-mime-type", settings.markdownMimeType);
-		// Gdrive multi-accounts
-		utils.setInputValue("#input-settings-gdrive-multiaccount", settings.gdriveMultiAccount);
-		// Gdrive full access
-		utils.setInputChecked("#input-settings-gdrive-full-access", settings.gdriveFullAccess);
-		// Dropbox full access
-		utils.setInputChecked("#input-settings-dropbox-full-access", settings.dropboxFullAccess);
-		// GitHub full access
-		utils.setInputChecked("#input-settings-github-full-access", settings.githubFullAccess);
-		// Template
-		utils.setInputValue("#textarea-settings-publish-template", settings.template);
-		// PDF template
-		utils.setInputValue("#textarea-settings-pdf-template", settings.pdfTemplate);
-		// PDF options
-		utils.setInputValue("#textarea-settings-pdf-options", settings.pdfOptions);
-		// CouchDB URL
-		utils.setInputValue("#input-settings-couchdb-url", settings.couchdbUrl);
-
-		// Load extension settings
-		eventMgr.onLoadSettings();
-	}
-
-	// Save settings from settings dialog
-	function saveSettings(event) {
-		var newSettings = {};
-
-		// Layout orientation
-		newSettings.layoutOrientation = utils.getInputRadio("radio-layout-orientation");
-		// Theme
-		var theme = utils.getInputValue($themeInputElt);
-		// Lazy Rendering
-		newSettings.lazyRendering = utils.getInputChecked("#input-settings-lazy-rendering");
-		// Editor font class
-		newSettings.editorFontClass = utils.getInputRadio("radio-settings-editor-font-class");
-		// Font size ratio
-		newSettings.fontSizeRatio = utils.getInputFloatValue("#input-settings-font-size", event, 0.1, 10);
-		// Max width ratio
-		newSettings.maxWidthRatio = utils.getInputFloatValue("#input-settings-max-width", event, 0.1, 10);
-		// Cursor locking ratio
-		newSettings.cursorFocusRatio = utils.getInputFloatValue("#input-settings-cursor-focus", event, 0, 1);
-		// Default content
-		newSettings.defaultContent = utils.getInputValue("#textarea-settings-default-content");
-		// Edit mode
-		newSettings.editMode = utils.getInputRadio("radio-settings-edit-mode");
-		// Commit message
-		newSettings.commitMsg = utils.getInputTextValue("#input-settings-publish-commit-msg", event);
-		// Gdrive multi-accounts
-		newSettings.gdriveMultiAccount = utils.getInputIntValue("#input-settings-gdrive-multiaccount");
-		// Markdown MIME type
-		newSettings.markdownMimeType = utils.getInputValue("#input-settings-markdown-mime-type");
-		// Gdrive full access
-		newSettings.gdriveFullAccess = utils.getInputChecked("#input-settings-gdrive-full-access");
-		// Drobox full access
-		newSettings.dropboxFullAccess = utils.getInputChecked("#input-settings-dropbox-full-access");
-		// GitHub full access
-		newSettings.githubFullAccess = utils.getInputChecked("#input-settings-github-full-access");
-		// Template
-		newSettings.template = utils.getInputTextValue("#textarea-settings-publish-template", event);
-		// PDF template
-		newSettings.pdfTemplate = utils.getInputTextValue("#textarea-settings-pdf-template", event);
-		// PDF options
-		newSettings.pdfOptions = utils.getInputJSONValue("#textarea-settings-pdf-options", event);
-		// CouchDB URL
-		newSettings.couchdbUrl = utils.getInputValue("#input-settings-couchdb-url", event);
-
-		// Save extension settings
-		newSettings.extensionSettings = {};
-		eventMgr.onSaveSettings(newSettings.extensionSettings, event);
-
-		if(!event.isPropagationStopped()) {
-			if(settings.dropboxFullAccess !== newSettings.dropboxFullAccess) {
-				storage.removeItem('dropbox.lastChangeId');
-			}
-			$.extend(settings, newSettings);
-			storage.settings = JSON.stringify(settings);
-			storage.themeV4 = theme;
-		}
-	}
+	// var $themeInputElt;
 
 	// Create the PageDown editor
 	var pagedownEditor;
@@ -296,7 +188,7 @@ define([
 			}
 		});
 		// 插入图片
-		$(".action-insert-image").click(function(e) {
+		$(".action-insert-image").click(function() {
 			// 得到图片链接或图片
 			var value = document.mdImageManager.mdGetImgSrc();
 			// var value = utils.getInputTextValue($("#input-insert-image"), e);
@@ -313,9 +205,6 @@ define([
 				core.insertLinkCallback = undefined;
 			}
 		});
-
-		// Hot theme switcher in the settings
-		var currentTheme = window.theme;
 
 		// Avoid dropdown panels to close on click
 		$("div.dropdown-menu").click(function(e) {

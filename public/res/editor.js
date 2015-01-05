@@ -437,7 +437,7 @@ define([
 	// 为page.js的拖动编辑与预览宽度用
 	editor.onResize = function(){ 
 		eventMgr.onLayoutResize(); 
-	}
+	};
 
 	var contentQueue = false;
 	editor.setContent = function(content) {
@@ -527,9 +527,7 @@ define([
 
 	editor.getValue = getValue;
 	editor.getContent = getValue;
-	// MD在common.js中
-	MD = editor;
-
+	
 	function focus() {
 		$contentElt.focus();
 		selectionMgr.updateSelectionRange();

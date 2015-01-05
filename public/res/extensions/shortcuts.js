@@ -91,14 +91,12 @@ define([
 			// 只在输入框下有效, life
 			// http://stackoverflow.com/questions/16169645/using-mousetrap-on-a-specific-element
 			var input = $('.editor-content');
-			var _oldStopCallback = Mousetrap.stopCallback;
-			Mousetrap.stopCallback = function(e, element, combo) {
-		        return element !== input[0];
-			    return _oldStopCallback(e, element, combo);
-			}
+			mousetrap.stopCallback = function(e, element, combo) {
+				return element !== input[0];
+			};
 
-			/*jshint evil: true */
 			var shortcutMap;
+			/*jshint evil: true */
 			eval('shortcutMap = ' + shortcuts.config.mapping);
 			_.each(shortcutMap, function(func, shortcut) {
 				mousetrap.bind(shortcut, func);

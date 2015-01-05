@@ -3,7 +3,13 @@
     "node": true,
     "indent": 4,
     "latedef": true,
-    "undef": true,
+    // "undef": true,
     "unused": true,
-    "expr": true
+    "expr": true,
+    // "$": true,
+    "globals": {
+	    "$": false,
+	    "jQuery": false, /* 不可写 */
+	    "MD": true /* 可写 */
+	}
 }

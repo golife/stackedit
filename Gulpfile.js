@@ -45,7 +45,7 @@ gulp.task('jshint', function() {
 		'./public/res/providers/**/*.js',
 		'./public/res/*.js'
 	])
-		.pipe(jshint())
+		.pipe(jshint(".jshintrc"))
 		.pipe(jshint.reporter('default'))
 		.pipe(jshint.reporter('fail'));
 });
