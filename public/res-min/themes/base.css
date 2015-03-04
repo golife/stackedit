@@ -188,7 +188,7 @@ pre {
 }
 p,
 blockquote {
-  margin: 0 0 1.1em;
+  margin: 0 0 0.3em;
 }
 hr {
   margin: 2em 0;
@@ -199,7 +199,7 @@ img {
 .sequence-diagram,
 .flow-chart {
   text-align: center;
-  margin-bottom: 1.1em;
+  margin-bottom: 0.3em;
 }
 .sequence-diagram text,
 .flow-chart text {
@@ -290,7 +290,7 @@ blockquote {
   padding: 15px 20px;
 }
 blockquote p {
-  margin-bottom: 1.1em;
+  margin-bottom: 0.3em;
   font-size: 1em;
   line-height: 1.45;
 }
@@ -300,13 +300,13 @@ blockquote ol:last-child {
 }
 ul,
 ol {
-  margin-bottom: 1.1em;
+  margin-bottom: 0.3em;
 }
 ul ul,
 ol ul,
 ul ol,
 ol ol {
-  margin-bottom: 1.1em;
+  margin-bottom: 0.3em;
 }
 kbd {
   padding: 0.1em 0.6em;

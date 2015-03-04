@@ -76,7 +76,7 @@ gulp.task('requirejs', [
 		name: 'main',
 		out: 'main.js',
 		mainConfigFile: 'public/res/main.js',
-		optimize: 'uglify2',
+		// optimize: 'uglify2', // 压缩
 		inlineText: true,
 		paths: {
 			mathjax: 'empty:'
@@ -87,12 +87,15 @@ gulp.task('requirejs', [
 			'less/lessc'
 		]
 	})
+	// 压缩先取消
+	/*
 		.pipe(uglify({
 			output: {
 				beautify: false,
 				indent_level: 1
 			}
 		}))
+	*/
 		.pipe(gulp.dest('./public/res-min/'));
 });
 

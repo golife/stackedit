@@ -306,7 +306,9 @@ define([
 			extensionPreviewButtonsFragment.appendChild(createBtn(listener));
 		});
 		var previewButtonsElt = document.querySelector('.extension-preview-buttons');
-		previewButtonsElt.appendChild(extensionPreviewButtonsFragment);
+		if(previewButtonsElt) {
+			previewButtonsElt.appendChild(extensionPreviewButtonsFragment);
+		}
 
 		// Shall close every popover
 		mousetrap.bind('escape', function() {
